@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://testnesttutorial.netlify.app/sitemap.xml
+Sitemap: https://testjstutorial.netlify.app/sitemap.xml
