@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://testnesttutorial.netlify.app/</loc>
+    <loc>https://testjstutorial.netlify.app/</loc>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/about</loc>
+    <loc>https://testjstutorial.netlify.app/about</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog</loc>
+    <loc>https://testjstutorial.netlify.app/blog</loc>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/contact</loc>
+    <loc>https://testjstutorial.netlify.app/contact</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/advanced-react-tutorial</loc>
+    <loc>https://testjstutorial.netlify.app/blog/advanced-react-tutorial</loc>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/getting-started-with-web-development</loc>
+    <loc>https://testjstutorial.netlify.app/blog/getting-started-with-web-development</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/javascript-habits-that-save-time</loc>
+    <loc>https://testjstutorial.netlify.app/blog/javascript-habits-that-save-time</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/react-components-for-beginners</loc>
+    <loc>https://testjstutorial.netlify.app/blog/react-components-for-beginners</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/why-nextjs-is-popular</loc>
+    <loc>https://testjstutorial.netlify.app/blog/why-nextjs-is-popular</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/ai-tools-for-everyday-coding</loc>
+    <loc>https://testjstutorial.netlify.app/blog/ai-tools-for-everyday-coding</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/seo-basics-every-beginner-should-know</loc>
+    <loc>https://testjstutorial.netlify.app/blog/seo-basics-every-beginner-should-know</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/css-layouts-that-feel-modern</loc>
+    <loc>https://testjstutorial.netlify.app/blog/css-layouts-that-feel-modern</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/html-semantics-made-simple</loc>
+    <loc>https://testjstutorial.netlify.app/blog/html-semantics-made-simple</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/freelancing-tips-for-new-developers</loc>
+    <loc>https://testjstutorial.netlify.app/blog/freelancing-tips-for-new-developers</loc>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://testnesttutorial.netlify.app/blog/programming-tips-for-faster-learning</loc>
+    <loc>https://testjstutorial.netlify.app/blog/programming-tips-for-faster-learning</loc>
     <priority>0.7</priority>
   </url>
 </urlset>
