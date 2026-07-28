@@ -18,6 +18,9 @@ const figtree = Figtree({
 // Intentionally minimal metadata — SEO fields left for you to add later.
 export const metadata = {
   title: "TechNest Academy",
+  verification: {
+    google: "q3tEwqck3HyABBgXcVsAWfmWZw2kOaMlp6GaxzyzdfQ",
+  },
 };
 
 export default function RootLayout({ children }) {
