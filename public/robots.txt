@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://reacttestnest.netlify.app/sitemap.xml
+Sitemap: https://testnesttutorial.netlify.app/sitemap.xml
