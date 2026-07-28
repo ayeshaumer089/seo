@@ -295,6 +295,360 @@ export const posts = [
       <p>Over months, these calm habits compound. You will still meet confusing topics, but you will meet them with a process you trust.</p>
     `,
   },
+  {
+    id: 11,
+    slug: "advanced-react-tutorial",
+    title: "Advanced React Tutorial",
+    category: "React",
+    author: "Maya Chen",
+    date: "2026-07-28",
+    image:
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=700&fit=crop",
+    excerpt:
+      "Move from React basics to Advanced React JS with performance optimization, Context API, Suspense, Lazy Loading, and Custom Hooks.",
+    content: `
+      <p>This Advanced React Tutorial is designed for developers who already understand the basics of React and want to master Advanced React JS concepts. In this guide, you will learn React Performance Optimization, Context API, Custom Hooks, React Suspense, and Lazy Loading through simple explanations and practical examples.</p>
+      <p>By the end of this tutorial, you will have a solid understanding of advanced React concepts and be able to build scalable, high-performance React applications.</p>
+      <p>If you are still building your foundation, start with our <a href="/blog/react-components-for-beginners">React Tutorial</a> and <a href="/blog/javascript-habits-that-save-time">JavaScript Tutorial</a> first.</p>
+
+      <h2>What is Advanced React?</h2>
+      <p>Advanced React refers to the set of concepts, techniques, and best practices used to build scalable, maintainable, and high-performance React applications.</p>
+      <p>After learning the basics of React — such as Components, JSX, Props, and State — developers move on to advanced topics like:</p>
+      <ul>
+        <li>Context API</li>
+        <li>Custom Hooks</li>
+        <li>React Suspense</li>
+        <li>Lazy Loading</li>
+        <li>Performance Optimization</li>
+      </ul>
+      <p>These concepts help you write cleaner, reusable, and more efficient code.</p>
+      <p>Learning Advanced React matters because modern web apps often include hundreds (or thousands) of components and complex user interactions. Without advanced techniques, apps can become slow, hard to manage, and difficult to maintain.</p>
+      <p>Understanding React Performance, Context API, and the Virtual DOM helps you build faster applications with a better user experience.</p>
+      <p>For example, imagine you are building an e-commerce website. Instead of passing user data through many components using props, you can use the Context API to share that data more efficiently. In the same way, Lazy Loading lets pages load only when needed, which improves speed and overall performance.</p>
+      <p>In short, Advanced React is the next step after React fundamentals. It gives you the skills to create professional, production-ready applications that are faster, easier to maintain, and ready for real-world projects.</p>
+
+      <h2>Prerequisites Before Learning Advanced React</h2>
+      <p>Before starting Advanced React, you should have a solid understanding of core React and modern JavaScript. Jumping into advanced topics too early can make development feel confusing.</p>
+      <p>That is why it is important to build a strong foundation before moving on to Context API, Custom Hooks, React Suspense, and Performance Optimization.</p>
+
+      <h3>What you should know first</h3>
+      <p>You should be comfortable with:</p>
+      <ul>
+        <li>Creating Components</li>
+        <li>Writing JSX</li>
+        <li>Managing Props and State</li>
+        <li>Handling events</li>
+        <li>Using Hooks like <code>useState</code> and <code>useEffect</code></li>
+      </ul>
+      <p>You should also know modern JavaScript features such as:</p>
+      <ul>
+        <li>ES6 syntax</li>
+        <li>Arrow functions</li>
+        <li>Destructuring</li>
+        <li>Promises and async/await</li>
+        <li>Array methods</li>
+      </ul>
+      <p>For example, if you do not understand how state updates work with <code>useState</code>, it will be harder to learn optimization tools like <code>React.memo</code> or <code>useCallback</code>. Likewise, understanding component communication is essential before using Context API in larger apps.</p>
+      <p>Want a refresher on Hooks first? Read our complete <a href="/react-hooks">React Hooks Guide</a>.</p>
+      <p>A simple learning path looks like this:</p>
+<pre><code>JavaScript Basics
+        ↓
+React Basics
+        ↓
+Components + JSX
+        ↓
+Props + State
+        ↓
+Hooks
+        ↓
+Advanced React</code></pre>
+      <p>Mastering the fundamentals first will help you understand advanced concepts more easily and build scalable applications with confidence.</p>
+
+      <h2>React Performance Optimization</h2>
+      <p>React Performance Optimization is the process of improving the speed, efficiency, and responsiveness of a React application. As apps grow, unnecessary re-renders and poor state management can slow down the user experience.</p>
+      <p>By using advanced React techniques, you can build faster and more scalable applications.</p>
+
+      <h3>Why Performance Optimization Matters</h3>
+      <p>Performance optimization helps reduce loading time, improve user experience, and make React apps more efficient. Fast websites keep users engaged and can also support better search visibility.</p>
+      <p>When your UI feels smooth, users stay longer — and your app becomes easier to scale.</p>
+
+      <h3>Common Performance Problems</h3>
+      <p>Some common issues include:</p>
+      <ul>
+        <li>Unnecessary component re-rendering</li>
+        <li>Large JavaScript bundles</li>
+        <li>Too many API requests</li>
+        <li>Poor state management</li>
+        <li>Rendering large lists without optimization</li>
+      </ul>
+      <p>These problems often show up only after an app grows, so it is useful to learn optimization early.</p>
+
+      <h3>Best Optimization Techniques</h3>
+      <p>Here are practical techniques used in Advanced React JS projects:</p>
+      <p><strong>1. Use React.memo to prevent unnecessary re-renders</strong></p>
+<pre><code>const MemoizedComponent = React.memo(function UserCard({ name }) {
+  return &lt;div&gt;{name}&lt;/div&gt;;
+});</code></pre>
+      <p><strong>2. Use useMemo for expensive calculations</strong></p>
+<pre><code>import { useMemo } from "react";
+
+function ProductList({ products, filter }) {
+  const filteredProducts = useMemo(() => {
+    return products.filter((product) =>
+      product.name.toLowerCase().includes(filter.toLowerCase())
+    );
+  }, [products, filter]);
+
+  return (
+    &lt;ul&gt;
+      {filteredProducts.map((product) => (
+        &lt;li key={product.id}&gt;{product.name}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+      <p><strong>3. Use useCallback for stable function references</strong></p>
+<pre><code>import { useCallback, useState } from "react";
+
+function Parent() {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    setCount((prev) => prev + 1);
+  }, []);
+
+  return &lt;Child onClick={handleClick} count={count} /&gt;;
+}</code></pre>
+      <p><strong>4. Use Code Splitting and Lazy Loading</strong></p>
+      <p>Splitting your code helps reduce the initial bundle size so your app loads faster.</p>
+      <p>For official guidance, check the <a href="https://react.dev/learn/render-and-commit" target="_blank" rel="noopener noreferrer">React documentation on performance</a> and <a href="https://developer.mozilla.org/en-US/docs/Web/Performance" target="_blank" rel="noopener noreferrer">MDN Web Docs</a>.</p>
+
+      <h3>Best Practices</h3>
+      <ul>
+        <li>Optimize only after measuring real performance issues</li>
+        <li>Keep components small and focused</li>
+        <li>Avoid storing unnecessary data in state</li>
+        <li>Prefer local state when global state is not needed</li>
+        <li>Use memoization carefully — not everywhere</li>
+      </ul>
+      <p><strong>Summary:</strong> React Performance Optimization is essential for scalable and responsive apps. With techniques like <code>React.memo</code>, <code>useMemo</code>, Lazy Loading, and Code Splitting, you can improve performance and deliver a better user experience.</p>
+
+      <h2>Context API</h2>
+      <p>The Context API lets you share data across components without passing props through every level of the tree. This is especially useful in larger apps where prop drilling becomes hard to manage.</p>
+      <p>Common use cases include:</p>
+      <ul>
+        <li>Theme settings (light/dark mode)</li>
+        <li>Authentication and user data</li>
+        <li>Language preferences</li>
+        <li>Shared app configuration</li>
+      </ul>
+
+      <h3>Basic Context API example</h3>
+<pre><code>import { createContext, useContext, useState } from "react";
+
+const ThemeContext = createContext();
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState("light");
+
+  return (
+    &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}</code></pre>
+      <p>Then consume it in any child component:</p>
+<pre><code>function ThemeButton() {
+  const { theme, setTheme } = useTheme();
+
+  return (
+    &lt;button onClick={() => setTheme(theme === "light" ? "dark" : "light")}&gt;
+      Current theme: {theme}
+    &lt;/button&gt;
+  );
+}</code></pre>
+
+      <h3>When to use Context API</h3>
+      <p>Use Context when:</p>
+      <ul>
+        <li>Many components need the same data</li>
+        <li>Prop drilling becomes messy</li>
+        <li>The shared data updates infrequently</li>
+      </ul>
+      <p>Avoid Context when:</p>
+      <ul>
+        <li>Only a few components need the data</li>
+        <li>Updates happen very frequently (this can cause extra re-renders)</li>
+      </ul>
+      <p>If you later move into full-stack React apps, Context often works well alongside routing and server components in a <a href="/blog/why-nextjs-is-popular">Next.js Tutorial</a>.</p>
+
+      <h2>Lazy Loading and React Suspense</h2>
+      <p>Lazy Loading means loading parts of your app only when they are needed. Combined with React Suspense, this improves initial load time and overall React Performance.</p>
+      <p>This approach is closely related to Code Splitting — one of the most important Advanced React concepts for production apps.</p>
+
+      <h3>Lazy Loading with React.lazy</h3>
+<pre><code>import { lazy, Suspense } from "react";
+
+const Dashboard = lazy(() => import("./Dashboard"));
+
+function App() {
+  return (
+    &lt;Suspense fallback={&lt;p&gt;Loading dashboard...&lt;/p&gt;}&gt;
+      &lt;Dashboard /&gt;
+    &lt;/Suspense&gt;
+  );
+}</code></pre>
+
+      <h3>Why this matters</h3>
+      <p>Without Lazy Loading, users may download code for pages they never visit. With Suspense and lazy components, you can:</p>
+      <ul>
+        <li>Reduce the initial JavaScript bundle</li>
+        <li>Improve page load speed</li>
+        <li>Load heavy features only when required</li>
+      </ul>
+      <p>A good rule of thumb: lazy-load routes, charts, admin panels, and other large feature modules.</p>
+      <p>Learn more in the official <a href="https://react.dev/reference/react/lazy" target="_blank" rel="noopener noreferrer">React lazy documentation</a> and <a href="https://react.dev/reference/react/Suspense" target="_blank" rel="noopener noreferrer">Suspense docs</a>.</p>
+
+      <h2>Higher Order Components</h2>
+      <p>A Higher Order Component (HOC) is a function that takes a component and returns a new component with extra behavior. HOCs were a common pattern before Hooks became popular, and you will still see them in many codebases.</p>
+      <p>Typical use cases include:</p>
+      <ul>
+        <li>Authentication checks</li>
+        <li>Logging and analytics</li>
+        <li>Reusing logic across multiple components</li>
+      </ul>
+
+      <h3>Simple HOC example</h3>
+<pre><code>function withAuth(WrappedComponent) {
+  return function AuthComponent(props) {
+    const isLoggedIn = Boolean(localStorage.getItem("token"));
+
+    if (!isLoggedIn) {
+      return &lt;p&gt;Please log in to continue.&lt;/p&gt;;
+    }
+
+    return &lt;WrappedComponent {...props} /&gt;;
+  };
+}
+
+function Profile() {
+  return &lt;h2&gt;Welcome to your profile&lt;/h2&gt;;
+}
+
+export default withAuth(Profile);</code></pre>
+
+      <h3>HOCs vs Custom Hooks</h3>
+      <p>Today, many teams prefer Custom Hooks because they are usually easier to read and compose. Still, understanding HOCs helps you maintain older projects and recognize Advanced React JS patterns in production code.</p>
+
+      <h2>Custom Hooks</h2>
+      <p>Custom Hooks let you extract reusable logic from components. They are one of the most practical React Advanced Concepts you will use every day.</p>
+      <p>A Custom Hook:</p>
+      <ul>
+        <li>Starts with <code>use</code></li>
+        <li>Can call other Hooks</li>
+        <li>Helps keep components clean and focused</li>
+      </ul>
+
+      <h3>Example: useLocalStorage</h3>
+<pre><code>import { useEffect, useState } from "react";
+
+function useLocalStorage(key, initialValue) {
+  const [value, setValue] = useState(() => {
+    const saved = localStorage.getItem(key);
+    return saved !== null ? JSON.parse(saved) : initialValue;
+  });
+
+  useEffect(() => {
+    localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+
+  return [value, setValue];
+}
+
+function Settings() {
+  const [username, setUsername] = useLocalStorage("username", "");
+
+  return (
+    &lt;input
+      value={username}
+      onChange={(e) => setUsername(e.target.value)}
+      placeholder="Enter username"
+    /&gt;
+  );
+}</code></pre>
+
+      <h3>Why Custom Hooks matter</h3>
+      <p>Custom Hooks help you:</p>
+      <ul>
+        <li>Reuse logic across components</li>
+        <li>Keep UI code cleaner</li>
+        <li>Test shared behavior more easily</li>
+        <li>Build scalable application architecture</li>
+      </ul>
+      <p>If you are still getting comfortable with built-in Hooks, revisit our <a href="/react-hooks">React Hooks Guide</a> before writing advanced Custom Hooks.</p>
+
+      <h2>Common Mistakes</h2>
+      <p>Even intermediate developers make mistakes when learning Advanced React. Here are a few to avoid:</p>
+      <ul>
+        <li><strong>Overusing Context API</strong> for every piece of state</li>
+        <li><strong>Memoizing everything</strong> with <code>React.memo</code>, <code>useMemo</code>, and <code>useCallback</code></li>
+        <li><strong>Skipping the basics</strong> and jumping straight into Redux or advanced patterns</li>
+        <li><strong>Creating huge components</strong> that do too many things</li>
+        <li><strong>Ignoring bundle size</strong> and loading all code upfront</li>
+        <li><strong>Mutating state directly</strong> instead of updating it immutably</li>
+        <li><strong>Forgetting dependency arrays</strong> in <code>useEffect</code>, <code>useMemo</code>, and <code>useCallback</code></li>
+      </ul>
+      <p>A better approach is simple: start with clear component design, measure performance, and apply advanced tools only when they solve a real problem.</p>
+      <p>Strong HTML and layout skills also help when debugging UI issues — see our <a href="/blog/html-semantics-made-simple">HTML Basics</a> and <a href="/blog/css-layouts-that-feel-modern">CSS Flexbox Guide</a> if you need a quick refresh.</p>
+
+      <h2>Best Practices</h2>
+      <p>Follow these best practices to write cleaner Advanced React JS code:</p>
+      <ul>
+        <li>Keep components small and focused on one responsibility</li>
+        <li>Prefer composition over complicated inheritance patterns</li>
+        <li>Use Context API for shared, low-frequency data</li>
+        <li>Extract repeated logic into Custom Hooks</li>
+        <li>Use Lazy Loading for large routes and features</li>
+        <li>Optimize with <code>React.memo</code>, <code>useMemo</code>, and <code>useCallback</code> only when needed</li>
+        <li>Keep state as local as possible</li>
+        <li>Write readable names for components, Hooks, and props</li>
+        <li>Test important logic and critical user flows</li>
+        <li>Stay consistent with folder structure and coding style</li>
+      </ul>
+      <p>These habits make your codebase easier to maintain as your project grows.</p>
+
+      <h2>FAQs</h2>
+
+      <h3>What is Advanced React?</h3>
+      <p>Advanced React includes concepts beyond basics — such as Context API, Custom Hooks, Performance Optimization, Lazy Loading, React Suspense, Higher Order Components, and scalable architecture patterns. It focuses on building production-ready applications.</p>
+
+      <h3>How do I become an advanced React developer?</h3>
+      <p>Start with strong JavaScript and React fundamentals. Then practice Advanced React concepts with real projects. Learn Performance Optimization, Context API, Custom Hooks, and Code Splitting, and review your code regularly. Building and refining real apps is the fastest path forward.</p>
+
+      <h3>What are advanced React concepts?</h3>
+      <p>Key advanced React concepts include:</p>
+      <ul>
+        <li>React Performance Optimization</li>
+        <li>Context API</li>
+        <li>Custom Hooks</li>
+        <li>Higher Order Components</li>
+        <li>Lazy Loading and React Suspense</li>
+        <li>Code Splitting</li>
+        <li>State management patterns (including Redux when needed)</li>
+      </ul>
+
+      <h3>Should I learn Redux after React?</h3>
+      <p>Not always immediately. First learn React state, Context API, and Custom Hooks. If your app grows and state becomes complex across many features, then Redux (or another state library) can be a useful next step.</p>
+
+      <h2>Conclusion</h2>
+      <p>Advanced React is about writing applications that stay fast, clean, and scalable as they grow. Once you understand the basics, concepts like Performance Optimization, Context API, Lazy Loading, Suspense, HOCs, and Custom Hooks help you build professional apps with confidence.</p>
+      <p>Keep practicing with real projects, apply these patterns carefully, and improve step by step. With consistent learning, you will move from intermediate React skills to Advanced React JS mastery.</p>
+    `,
+  },
 ];
 
 export function getPostBySlug(slug) {
