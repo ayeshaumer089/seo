@@ -1,5 +1,11 @@
 import Link from "next/link";
 
+export const metadata = {
+  title: "Page not found",
+  // Keep 404s out of the index so they don't consume crawl budget.
+  robots: { index: false, follow: true },
+};
+
 export default function NotFound() {
   return (
     <section className="container not-found">
@@ -7,9 +13,14 @@ export default function NotFound() {
       <p className="section-intro" style={{ marginInline: "auto" }}>
         The page you are looking for does not exist in TechNest Academy.
       </p>
-      <Link href="/" className="btn btn-primary">
-        Back to Home
-      </Link>
+      <div className="hero-actions">
+        <Link href="/" className="btn btn-primary">
+          Back to Home
+        </Link>
+        <Link href="/blog" className="btn btn-secondary">
+          Browse all articles
+        </Link>
+      </div>
     </section>
   );
 }

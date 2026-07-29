@@ -1,6 +1,7 @@
 import { Figtree, Syne } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { siteDescription, siteName, siteUrl } from "@/data/site";
 import "./globals.css";
 
 const syne = Syne({
@@ -15,11 +16,62 @@ const figtree = Figtree({
   weight: ["400", "500", "600", "700"],
 });
 
-// Intentionally minimal metadata — SEO fields left for you to add later.
 export const metadata = {
-  title: "TechNest Academy",
+  // Lets every child segment use relative URLs for canonical and OG images.
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: `${siteName} — Beginner-Friendly Web Development Guides`,
+    template: `%s | ${siteName}`,
+  },
+  description: siteDescription,
+  applicationName: siteName,
+  authors: [{ name: siteName, url: siteUrl }],
+  creator: siteName,
+  publisher: siteName,
+  // NOTE: `alternates` is deliberately NOT set here. Metadata is shallow-merged
+  // from the root down, so a canonical defined in this layout would be
+  // inherited by every page that doesn't override it — telling Google that
+  // /about, /blog and /contact are all duplicates of the homepage. Each page
+  // declares its own canonical instead.
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    siteName,
+    locale: "en_US",
+    title: `${siteName} — Beginner-Friendly Web Development Guides`,
+    description: siteDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteName} — Beginner-Friendly Web Development Guides`,
+    description: siteDescription,
+  },
   verification: {
     google: "q3tEwqck3HyABBgXcVsAWfmWZw2kOaMlp6GaxzyzdfQ",
+  },
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: siteName,
+  url: siteUrl,
+  description: siteDescription,
+  inLanguage: "en",
+  publisher: {
+    "@type": "Organization",
+    name: siteName,
+    url: siteUrl,
   },
 };
 
@@ -27,6 +79,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${syne.variable} ${figtree.variable}`}>
       <body>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+        />
         <Header />
         <main>{children}</main>
         <Footer />

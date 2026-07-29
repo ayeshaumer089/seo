@@ -1,8 +1,9 @@
 /**
- * Dummy blog posts for TechNest Academy.
- * All content is fictional and stored locally (no database).
- * Post lengths intentionally vary between roughly 300 and 800 words.
+ * Article content for TechNest Academy, stored locally (no database).
+ * Each entry drives its own route, sitemap entry and metadata.
  */
+
+import { siteAuthor } from "@/data/site";
 
 export const categories = [
   "Web Development",
@@ -23,7 +24,7 @@ export const posts = [
     slug: "getting-started-with-web-development",
     title: "Getting Started with Web Development in 2026",
     category: "Web Development",
-    author: "Aisha Rahman",
+    author: siteAuthor,
     date: "2026-03-12",
     image:
       "https://images.unsplash.com/photo-1498050108023-c8199c77ae80?w=1200&h=700&fit=crop",
@@ -51,7 +52,7 @@ export const posts = [
     slug: "javascript-habits-that-save-time",
     title: "JavaScript Habits That Save Hours Every Week",
     category: "JavaScript",
-    author: "Daniel Okoye",
+    author: siteAuthor,
     date: "2026-03-18",
     image:
       "https://images.unsplash.com/photo-1579468118864-1b9ea3c0b4c4?w=1200&h=700&fit=crop",
@@ -79,25 +80,104 @@ export const posts = [
     slug: "react-components-for-beginners",
     title: "Thinking in React Components as a Beginner",
     category: "React",
-    author: "Maya Chen",
+    author: siteAuthor,
     date: "2026-04-02",
+    updated: "2026-07-29",
     image:
       "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1200&h=700&fit=crop",
     excerpt:
-      "Learn how to break a user interface into reusable pieces without overcomplicating your first app.",
+      "How to split an interface into components, when to use props versus state, and the derived-state and key mistakes that trip up most beginners.",
     content: `
-      <h2>Components are Lego bricks for interfaces</h2>
-      <p>React encourages you to build interfaces from small, reusable pieces called components. Instead of writing one giant HTML file, you create building blocks such as a navigation bar, a post card, or a contact form. Each component can receive data through props and display that data in a consistent way.</p>
-      <p>This approach helps you reuse the same design across pages. If your blog card looks good once, you can render it many times with different titles, authors, and dates. That reuse is one of the biggest reasons teams love React.</p>
+      <p>React asks you to stop thinking about pages and start thinking about components — small, reusable pieces that receive data and return markup. This guide walks through how to split an interface into components, how props and state differ, and the mistakes that trip up most beginners.</p>
 
-      <h2>Start with the screen, then split</h2>
-      <p>A useful beginner method is to sketch the page first. Circle the repeated sections and turn each circle into a component. Keep the first version simple: pass text and images as props, and avoid advanced state management until you need it.</p>
-      <p>State becomes important when the interface changes after the user interacts with it. Examples include opening a mobile menu, typing into a form, or filtering a list of posts. Learn useState carefully and only store what the UI truly needs to remember.</p>
-      <p>If two components need the same piece of information, move that state to their closest shared parent. This pattern, often called lifting state up, keeps your data flow easier to follow.</p>
+      <h2>A component is a function that returns markup</h2>
+      <p>That is the whole idea. A component takes an object of inputs (props) and returns what should appear on screen:</p>
+<pre><code>function BlogCard({ title, category, date }) {
+  return (
+    &lt;article className="blog-card"&gt;
+      &lt;p className="category-pill"&gt;{category}&lt;/p&gt;
+      &lt;h3&gt;{title}&lt;/h3&gt;
+      &lt;time dateTime={date}&gt;{date}&lt;/time&gt;
+    &lt;/article&gt;
+  );
+}</code></pre>
+      <p>Write it once, render it many times with different data:</p>
+<pre><code>&lt;div className="posts-grid"&gt;
+  {posts.map((post) => (
+    &lt;BlogCard
+      key={post.id}
+      title={post.title}
+      category={post.category}
+      date={post.date}
+    /&gt;
+  ))}
+&lt;/div&gt;</code></pre>
+      <p>The <code>key</code> prop is not decorative. React uses it to match items between renders, so it must be stable and unique — a database id, not the array index. Using the index causes subtle bugs the moment the list is reordered or filtered.</p>
 
-      <h2>Avoid early over-engineering</h2>
-      <p>It is tempting to create folders and abstractions before you have a working page. Resist that urge. Build one screen that works, then extract repeated parts. Your future self will thank you for code that is easy to follow.</p>
-      <p>As your confidence grows, explore lists with keys, conditional rendering, and simple side effects. React feels natural once you practice seeing a page as a tree of components that pass information downward and respond to events upward.</p>
+      <h2>Splitting a page into components</h2>
+      <p>A reliable method: sketch the page, then circle every region that repeats or that has one clear job. Each circle becomes a component. A blog index typically decomposes into a page, a grid, and a card:</p>
+<pre><code>BlogPage
+ └─ PostsGrid
+     └─ BlogCard   (rendered once per post)</code></pre>
+      <p>Resist splitting further than that at first. Extracting a component for every heading and paragraph produces a tree so fragmented that following the data becomes harder than the duplication you removed. Build one screen that works, then extract the parts you actually repeat.</p>
+
+      <h3>Props flow down, and are read-only</h3>
+      <p>A component must never modify the props it receives. Data flows in one direction — parent to child — and that constraint is what makes React apps predictable. If a child needs to change something, the parent passes down a function for the child to call:</p>
+<pre><code>function Parent() {
+  const [query, setQuery] = useState("");
+
+  return &lt;SearchBox value={query} onChange={setQuery} /&gt;;
+}
+
+function SearchBox({ value, onChange }) {
+  return (
+    &lt;input value={value} onChange={(e) => onChange(e.target.value)} /&gt;
+  );
+}</code></pre>
+
+      <h2>State is memory between renders</h2>
+      <p>Props come from outside. State is what a component remembers on its own — a menu being open, text typed into a field, a filter selection.</p>
+<pre><code>import { useState } from "react";
+
+function NavToggle() {
+  const [open, setOpen] = useState(false);
+
+  return (
+    &lt;button aria-expanded={open} onClick={() => setOpen(!open)}&gt;
+      {open ? "Close menu" : "Open menu"}
+    &lt;/button&gt;
+  );
+}</code></pre>
+      <p>When the new value depends on the previous one, pass a function instead of a value. This avoids stale reads when updates are batched:</p>
+<pre><code>setCount((previous) => previous + 1);   // safe
+setCount(count + 1);                     // can go stale</code></pre>
+
+      <h3>Do not put derived values in state</h3>
+      <p>This is the single most common beginner mistake. If a value can be calculated from existing props or state, calculate it during render — do not store a second copy that you have to keep synchronized:</p>
+<pre><code>// Avoid: two sources of truth that will drift apart
+const [posts, setPosts] = useState(allPosts);
+const [visible, setVisible] = useState(allPosts);
+
+// Prefer: one source of truth, derive the rest
+const [category, setCategory] = useState("All");
+const visible =
+  category === "All"
+    ? allPosts
+    : allPosts.filter((post) => post.category === category);</code></pre>
+      <p>Every piece of state you remove is a bug you can no longer write.</p>
+
+      <h3>Lifting state up</h3>
+      <p>When two components need the same information, move that state to their closest shared parent and pass it down to both. A category filter and a results grid both need the selected category, so it belongs to the page that renders them — not to either one individually.</p>
+
+      <h2>Conditional rendering without the gotchas</h2>
+      <p>Use a ternary when you need one branch or the other, and <code>&amp;&amp;</code> when you need something or nothing:</p>
+<pre><code>{isLoading ? &lt;Spinner /&gt; : &lt;PostList posts={posts} /&gt;}
+
+{related.length > 0 &amp;&amp; &lt;RelatedPosts items={related} /&gt;}</code></pre>
+      <p>Watch out for the number-zero trap: <code>{posts.length &amp;&amp; &lt;List /&gt;}</code> renders a literal <code>0</code> on the page when the array is empty, because <code>0</code> is falsy but still a valid thing to render. Compare explicitly with <code>&gt; 0</code>.</p>
+
+      <h2>Where to go next</h2>
+      <p>Once components, props, and state feel natural, the next steps are effects, custom hooks, and performance work — all covered in our <a href="/blog/advanced-react-tutorial">advanced React tutorial</a>. If you plan to build full websites rather than single apps, <a href="/blog/why-nextjs-is-popular">Next.js</a> layers routing and server rendering on top of exactly these concepts.</p>
       <p>Most importantly, celebrate small interfaces that work. A polished button group or a reusable card component is real progress, even if the rest of the app is still simple.</p>
     `,
   },
@@ -106,26 +186,102 @@ export const posts = [
     slug: "why-nextjs-is-popular",
     title: "Why Next.js Became a Favorite for Modern Sites",
     category: "Next.js",
-    author: "Omar Farooq",
+    author: siteAuthor,
     date: "2026-04-10",
+    updated: "2026-07-29",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=700&fit=crop",
     excerpt:
-      "An approachable look at routing, pages, and deployment with Next.js for learners coming from plain React.",
+      "File-based routing, server vs client components, the metadata API, and deployment — the parts of Next.js that matter when you come from plain React.",
     content: `
-      <h2>From React app to full website toolkit</h2>
-      <p>React is excellent at building interactive interfaces, but a complete website also needs routing, page structure, and a smooth path to production. Next.js wraps React with practical features that many teams need on day one. You can create pages by adding files to folders, which makes navigation feel organized and predictable.</p>
-      <p>For beginners, this file-based routing is a major win. Want an About page? Create an about folder with a page file. Want a dynamic blog post? Use a slug folder and load the matching article. The mental model is easy to teach and easy to remember.</p>
-      <p>Because the project structure is conventional, other developers can often find their way around your code quickly. That shared understanding is valuable when you collaborate or open source a learning project.</p>
+      <p>React is excellent at building interactive interfaces, but a complete website also needs routing, page structure, metadata, and a path to production. Next.js supplies all of that. This guide covers the parts that matter when you are moving from plain React — file-based routing, server and client components, metadata, and deployment.</p>
 
-      <h2>Development speed without chaos</h2>
-      <p>Next.js gives you a strong default setup: a local development server, modern JavaScript support, and a production build command. That means less time configuring tools and more time learning how your pages work. You can start with static content and later add forms, APIs, or server logic if your project needs them.</p>
-      <p>The ecosystem is widely used, so finding examples and explanations is usually straightforward. That community effect matters when you are learning and need answers quickly.</p>
-      <p>Still, you do not need every feature on day one. Learn pages, layouts, and links first. Add complexity only when a real requirement appears in your project.</p>
+      <h2>File-based routing removes a whole category of decisions</h2>
+      <p>In a plain React app you install a router, configure it, and maintain a list of route definitions. In Next.js the folder structure <em>is</em> the routing table. A file at a given path becomes a URL:</p>
+<pre><code>app/
+  page.js              →  /
+  about/page.js        →  /about
+  blog/page.js         →  /blog
+  blog/[slug]/page.js  →  /blog/anything</code></pre>
+      <p>Square brackets mark a dynamic segment. The value arrives as a route parameter, so one file serves every article on your site. In recent versions <code>params</code> is a promise, so you await it:</p>
+<pre><code>export default async function BlogPostPage({ params }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
-      <h2>A calm path to deployment</h2>
-      <p>Many learners choose Next.js because deploying a finished site is approachable. Platforms like Vercel and Netlify integrate smoothly with common project structures. Once your pages render locally, you can connect a repository and publish a live URL.</p>
-      <p>Remember that Next.js is still React underneath. The more comfortable you become with components, props, and state, the more powerful Next.js feels. Learn the basics thoroughly, then explore advanced features only when a real project requires them.</p>
+  return &lt;article&gt;&lt;h1&gt;{post.title}&lt;/h1&gt;&lt;/article&gt;;
+}</code></pre>
+      <p>Pair that with <code>generateStaticParams</code> and Next.js pre-renders every article to static HTML at build time:</p>
+<pre><code>export function generateStaticParams() {
+  return posts.map((post) => ({ slug: post.slug }));
+}</code></pre>
+      <p>The payoff is that each page ships as real HTML. Search engines and social scrapers see your content in the initial response instead of an empty div waiting for JavaScript.</p>
+
+      <h2>Server components by default</h2>
+      <p>The biggest conceptual shift from plain React is that components render on the server unless you say otherwise. Server components can read data directly, never ship their JavaScript to the browser, and cannot use hooks or event handlers.</p>
+      <p>When you need interactivity — state, effects, click handlers — you opt in with a directive at the top of the file:</p>
+<pre><code>"use client";
+
+import { useState } from "react";
+
+export default function Header() {
+  const [open, setOpen] = useState(false);
+  // ...
+}</code></pre>
+      <p>The practical rule: keep pages as server components, and push interactive pieces down into small client components. A navigation menu that toggles open needs <code>"use client"</code>; the page rendering your article does not. This keeps your JavaScript bundle small, which is exactly the outcome the <a href="/blog/advanced-react-tutorial">performance techniques in our advanced React guide</a> aim for.</p>
+
+      <h2>Metadata is part of the framework</h2>
+      <p>In plain React, page titles and descriptions usually require an extra library and run after the page loads. Next.js treats metadata as a first-class export, resolved on the server and included in the initial HTML.</p>
+      <p>Static metadata is a plain object:</p>
+<pre><code>export const metadata = {
+  title: "About",
+  description: "What this site covers and who writes it.",
+  alternates: { canonical: "/about" },
+};</code></pre>
+      <p>Dynamic pages export a function instead:</p>
+<pre><code>export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: \`/blog/\${post.slug}\` },
+  };
+}</code></pre>
+      <p>One subtlety worth knowing early: metadata is shallow-merged from the root layout downward, and any field a page does not set is inherited. Setting a canonical URL in your root layout will therefore apply it to every page that does not override it — which tells Google your whole site is a duplicate of one URL. Set canonicals per page. Our <a href="/blog/seo-basics-every-beginner-should-know">SEO basics guide</a> explains why that single mistake is so damaging.</p>
+
+      <h2>Layouts, and what makes them different</h2>
+      <p>A <code>layout.js</code> wraps every page beneath it and — importantly — does not re-render when you navigate between sibling pages. Shared headers, footers, and fonts belong there:</p>
+<pre><code>export default function RootLayout({ children }) {
+  return (
+    &lt;html lang="en"&gt;
+      &lt;body&gt;
+        &lt;Header /&gt;
+        &lt;main&gt;{children}&lt;/main&gt;
+        &lt;Footer /&gt;
+      &lt;/body&gt;
+    &lt;/html&gt;
+  );
+}</code></pre>
+      <p>Special files sit alongside it: <code>loading.js</code> for a loading state, <code>not-found.js</code> for 404s, and <code>error.js</code> for error boundaries. Each is wired up by filename — no registration step.</p>
+
+      <h2>Built-in files for robots and sitemaps</h2>
+      <p>Two small conventions save real effort. A <code>app/sitemap.js</code> returning an array generates <code>/sitemap.xml</code>, and <code>app/robots.js</code> generates <code>/robots.txt</code>:</p>
+<pre><code>export default function robots() {
+  return {
+    rules: { userAgent: "*", allow: "/" },
+    sitemap: "https://example.com/sitemap.xml",
+  };
+}</code></pre>
+      <p>Because these are code, your sitemap stays in sync with your content automatically. One caveat: a static file in <code>public/</code> with the same name conflicts with the generated route, so pick one approach.</p>
+
+      <h2>Deployment, and what changes on each host</h2>
+      <p>Vercel and Netlify both build from a connected Git repository, so pushing to your main branch publishes the site. Netlify handles Next.js through an adapter that maps server rendering onto its own infrastructure; for a mostly static content site like a blog, everything pre-renders at build time and there is little to configure.</p>
+      <p>Two things to verify after your first deploy: that <code>/robots.txt</code> and <code>/sitemap.xml</code> actually load at your live domain, and that "View page source" on an article shows your content in the HTML. If both are true, the site is genuinely crawlable.</p>
+
+      <h2>What to learn first</h2>
+      <p>You do not need every feature on day one. Learn pages, layouts, links, and metadata. Add server actions, route handlers, and caching only when a real requirement appears.</p>
+      <p>Remember that Next.js is still React underneath. If components, props, and state feel shaky, spend time on <a href="/blog/react-components-for-beginners">thinking in React components</a> first — every Next.js concept sits on top of that foundation.</p>
     `,
   },
   {
@@ -133,7 +289,7 @@ export const posts = [
     slug: "ai-tools-for-everyday-coding",
     title: "Using AI Tools Without Losing Your Coding Skills",
     category: "Artificial Intelligence",
-    author: "Priya Nair",
+    author: siteAuthor,
     date: "2026-04-21",
     image:
       "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&h=700&fit=crop",
@@ -161,27 +317,87 @@ export const posts = [
     slug: "seo-basics-every-beginner-should-know",
     title: "SEO Basics Every Beginner Should Know",
     category: "SEO Basics",
-    author: "Elena Morales",
+    author: siteAuthor,
     date: "2026-05-01",
+    updated: "2026-07-29",
     image:
       "https://images.unsplash.com/photo-1432888498266-38ffec52ef0f?w=1200&h=700&fit=crop",
     excerpt:
-      "A gentle introduction to how search engines discover pages and why clear content structure matters.",
+      "Crawling, indexing and ranking explained — plus how to read Search Console status labels and a checklist to diagnose pages Google skips.",
     content: `
-      <h2>What SEO really means</h2>
-      <p>Search engine optimization is the practice of helping people find your pages through search results. It is not magic, and it is not only about keywords. At a basic level, search engines try to understand what a page is about and whether it might help a person looking for information.</p>
-      <p>For beginners, the most important idea is clarity. If your page has a clear topic, readable headings, and useful content, you are already thinking in the right direction. Technical details matter later, but communication comes first.</p>
-      <p>SEO works best as an ongoing habit. You improve one page, learn from the result, and apply that lesson to the next page.</p>
+      <p>Search engine optimization is the practice of helping people find your pages through search results. It is not magic, and it is not only about keywords. This guide walks through the three stages every page must pass — crawling, indexing, and ranking — and shows you exactly what to check at each one.</p>
 
-      <h2>Content people can understand</h2>
-      <p>Write for humans before you write for algorithms. Use headings that describe sections honestly. Keep paragraphs focused. Answer the question a visitor likely has when they arrive. Thin pages that repeat the same phrase rarely help anyone, including search engines.</p>
-      <p>Internal links between related articles can also help visitors explore your site. When someone finishes a beginner guide, offer a natural next step. Good navigation supports both users and discovery.</p>
-      <p>Choose titles that match the promise of the article. If the heading says the post is for beginners, make sure the examples truly feel beginner-friendly.</p>
+      <h2>Crawling, indexing, and ranking are three different things</h2>
+      <p>Most beginner confusion comes from treating these as one step. They are not, and a page can fail at any of them independently.</p>
+      <ul>
+        <li><strong>Crawling</strong> — Googlebot requests your URL and downloads the HTML. Blocked by <code>robots.txt</code>, server errors, or the page simply never being discovered.</li>
+        <li><strong>Indexing</strong> — Google evaluates the page and decides whether to store it. Blocked by a <code>noindex</code> tag, a canonical pointing elsewhere, duplicate content, or a judgement that the page adds nothing new.</li>
+        <li><strong>Ranking</strong> — Google decides where an indexed page appears for a given query. This is where relevance, quality, and links matter.</li>
+      </ul>
+      <p>The practical consequence: if your page is not indexed, working on keywords is wasted effort. Fix the earlier stage first.</p>
 
-      <h2>Technical basics come later</h2>
-      <p>As you grow, you will learn about titles, descriptions, structured data, sitemaps, and indexing. Those topics are powerful, but they work best on top of solid pages. A beautifully tagged empty page still has little value.</p>
-      <p>If you are practicing SEO yourself, start by reviewing one page at a time. Ask whether the main topic is obvious within a few seconds. Then improve headings, examples, and readability. Strong fundamentals make every advanced SEO technique more effective.</p>
-      <p>This article is only an introduction. The rest of your learning can happen by editing real pages, measuring what changes, and noticing how clearer writing improves the experience for every visitor.</p>
+      <h3>The single most useful diagnostic</h3>
+      <p>Open Google Search Console, go to <strong>Indexing → Pages</strong>, and read the exact status label on a URL that is missing. The wording tells you which stage failed:</p>
+      <ul>
+        <li><strong>Discovered – currently not indexed</strong> — Google knows the URL exists but has not crawled it. Usually a crawl-budget or site-authority signal, common on brand-new sites.</li>
+        <li><strong>Crawled – currently not indexed</strong> — Google fetched and evaluated the page, then declined to store it. This is a quality or duplication judgement, not a bug.</li>
+        <li><strong>Duplicate without user-selected canonical</strong> — Google found near-identical pages and picked one. Often caused by every page sharing the same title and description.</li>
+        <li><strong>Alternate page with proper canonical tag</strong> — your own canonical tag is pointing at a different URL. Check that each page declares itself.</li>
+        <li><strong>Excluded by ‘noindex’ tag</strong> — an explicit directive in your HTML. Search your codebase for it.</li>
+      </ul>
+
+      <h2>robots.txt and noindex do completely different jobs</h2>
+      <p>This trips up almost every beginner. <code>robots.txt</code> controls <em>crawling</em>. The <code>noindex</code> meta tag controls <em>indexing</em>. They are not interchangeable.</p>
+      <p>A file at the root of your domain tells crawlers which paths they may request:</p>
+<pre><code>User-Agent: *
+Allow: /
+
+Sitemap: https://example.com/sitemap.xml</code></pre>
+      <p>A meta tag in the page's <code>&lt;head&gt;</code> tells Google not to store the page:</p>
+<pre><code>&lt;meta name="robots" content="noindex, follow" /&gt;</code></pre>
+      <p>Here is the trap: if you block a URL in <code>robots.txt</code>, Googlebot cannot fetch the page — which means it never sees the <code>noindex</code> tag inside it. The URL can then still appear in results as a bare link with no description. To keep a page out of the index, allow crawling and use <code>noindex</code>. Never both.</p>
+
+      <h2>Give every page a unique title and description</h2>
+      <p>A surprising number of sites ship with one title repeated across every page, usually because it was set once in a shared layout and never overridden. To Google, twenty pages with an identical title and no description look like one page duplicated twenty times — so it indexes one and discards the rest.</p>
+      <p>Each page needs:</p>
+      <ul>
+        <li>A <strong>title</strong> of roughly 50–60 characters that describes that specific page</li>
+        <li>A <strong>meta description</strong> of roughly 140–160 characters written for a human deciding whether to click</li>
+        <li>A <strong>self-referencing canonical</strong> — the page's own URL, telling Google this is the version to index</li>
+      </ul>
+      <p>Beware of inherited canonicals. In framework layouts, a canonical set at the root often cascades to every child page that does not override it, silently declaring your entire site a duplicate of the homepage. Always verify the rendered HTML rather than trusting the source.</p>
+
+      <h3>How to check what Google actually sees</h3>
+      <p>View the raw HTML, not the rendered page in DevTools — those can differ. Right-click and choose "View page source", then search for <code>&lt;title&gt;</code>, <code>name="description"</code>, <code>rel="canonical"</code>, and <code>name="robots"</code>. Do this on three or four different pages and confirm the values actually differ. This one check catches the majority of beginner indexing problems.</p>
+
+      <h2>Structure your content for both readers and parsers</h2>
+      <p>Write for humans first, but structure deliberately. Use exactly one <code>&lt;h1&gt;</code> describing the page topic, then <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> to build a logical outline. Do not pick heading levels for their font size — that is what CSS is for. Our guide to <a href="/blog/html-semantics-made-simple">HTML semantics</a> covers why the tags themselves carry meaning.</p>
+      <p>Answer the question a visitor actually arrived with, ideally in the first two paragraphs. Pages that bury the answer under three screens of preamble tend to lose readers, and the resulting behaviour is not a good signal.</p>
+
+      <h2>Internal links are how Google finds your pages</h2>
+      <p>Google discovers most pages by following links. A page that no other page links to — an "orphan" — may sit in your sitemap for months without being crawled. A sitemap is a hint; internal links are the actual path.</p>
+      <p>Three habits that help:</p>
+      <ul>
+        <li>Link from your homepage to your most important pages directly</li>
+        <li>End each article with two or three links to genuinely related articles</li>
+        <li>Use descriptive anchor text — "thinking in React components" tells Google far more than "click here"</li>
+      </ul>
+
+      <h2>Why new sites wait, and what actually shortens the wait</h2>
+      <p>A brand-new site with no inbound links receives a very small crawl budget. Typical first indexing runs from a few days to several weeks, and full coverage of a small site can take one to three months. This is normal and not a sign that something is broken.</p>
+      <p>Repeatedly clicking "Request Indexing" in Search Console does not speed this up — it is a hint, not a command, and the daily quota is small. What genuinely helps is having pages worth indexing, a clean crawl path to them, and a few real links from places that are already crawled regularly.</p>
+
+      <h2>A checklist you can actually run</h2>
+      <ul>
+        <li>Does <code>/robots.txt</code> load, and does it allow your content?</li>
+        <li>Does <code>/sitemap.xml</code> load and list every URL you want indexed?</li>
+        <li>Does each page have a unique title and description in the raw HTML?</li>
+        <li>Does each page's canonical point at itself?</li>
+        <li>Is there a <code>noindex</code> tag anywhere you did not intend?</li>
+        <li>Can you reach every page by clicking links from the homepage?</li>
+        <li>Does every page return HTTP 200, not a soft 404?</li>
+      </ul>
+      <p>Work down that list before touching keywords. Strong fundamentals make every advanced technique more effective, and a beautifully tagged empty page still has little value.</p>
     `,
   },
   {
@@ -189,7 +405,7 @@ export const posts = [
     slug: "css-layouts-that-feel-modern",
     title: "CSS Layouts That Feel Modern Without Extra Libraries",
     category: "CSS",
-    author: "Noah Williams",
+    author: siteAuthor,
     date: "2026-05-14",
     image:
       "https://images.unsplash.com/photo-1507721999472-57bd63fc2aec?w=1200&h=700&fit=crop",
@@ -217,7 +433,7 @@ export const posts = [
     slug: "html-semantics-made-simple",
     title: "HTML Semantics Made Simple",
     category: "HTML",
-    author: "Sofia Almeida",
+    author: siteAuthor,
     date: "2026-05-26",
     image:
       "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&h=700&fit=crop",
@@ -244,7 +460,7 @@ export const posts = [
     slug: "freelancing-tips-for-new-developers",
     title: "Freelancing Tips for New Developers",
     category: "Freelancing",
-    author: "Liam Carter",
+    author: siteAuthor,
     date: "2026-06-08",
     image:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&h=700&fit=crop",
@@ -272,7 +488,7 @@ export const posts = [
     slug: "programming-tips-for-faster-learning",
     title: "Programming Tips for Faster, Calmer Learning",
     category: "Programming Tips",
-    author: "Hannah Brooks",
+    author: siteAuthor,
     date: "2026-06-20",
     image:
       "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=700&fit=crop",
@@ -300,7 +516,7 @@ export const posts = [
     slug: "advanced-react-tutorial",
     title: "Advanced React Tutorial",
     category: "React",
-    author: "Maya Chen",
+    author: siteAuthor,
     date: "2026-07-28",
     image:
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=700&fit=crop",
@@ -349,7 +565,7 @@ export const posts = [
         <li>Array methods</li>
       </ul>
       <p>For example, if you do not understand how state updates work with <code>useState</code>, it will be harder to learn optimization tools like <code>React.memo</code> or <code>useCallback</code>. Likewise, understanding component communication is essential before using Context API in larger apps.</p>
-      <p>Want a refresher on Hooks first? Read our complete <a href="/react-hooks">React Hooks Guide</a>.</p>
+      <p>Want a refresher on components and state first? Read our <a href="/blog/react-components-for-beginners">guide to thinking in React components</a>.</p>
       <p>A simple learning path looks like this:</p>
 <pre><code>JavaScript Basics
         ↓
@@ -589,7 +805,7 @@ function Settings() {
         <li>Test shared behavior more easily</li>
         <li>Build scalable application architecture</li>
       </ul>
-      <p>If you are still getting comfortable with built-in Hooks, revisit our <a href="/react-hooks">React Hooks Guide</a> before writing advanced Custom Hooks.</p>
+      <p>If you are still getting comfortable with built-in Hooks, revisit our <a href="/blog/react-components-for-beginners">React components guide</a> before writing advanced Custom Hooks.</p>
 
       <h2>Common Mistakes</h2>
       <p>Even intermediate developers make mistakes when learning Advanced React. Here are a few to avoid:</p>
@@ -653,6 +869,26 @@ function Settings() {
 
 export function getPostBySlug(slug) {
   return posts.find((post) => post.slug === slug);
+}
+
+/**
+ * Posts to link to from the end of an article: same-category first, then the
+ * most recent remaining posts. Every article therefore links out to at least
+ * three others, so crawlers can reach the whole blog from any entry point.
+ */
+export function getRelatedPosts(slug, count = 3) {
+  const current = getPostBySlug(slug);
+  if (!current) return [];
+
+  const others = posts.filter((post) => post.slug !== slug);
+  const sameCategory = others.filter(
+    (post) => post.category === current.category
+  );
+  const rest = others
+    .filter((post) => post.category !== current.category)
+    .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  return [...sameCategory, ...rest].slice(0, count);
 }
 
 export function getLatestPosts(count = 6) {

@@ -1,3 +1,25 @@
+import Link from "next/link";
+import { categories, posts } from "@/data/posts";
+import { siteName } from "@/data/site";
+
+const description =
+  "TechNest Academy is a learning-focused technology blog helping beginners explore web development, JavaScript, React and CSS with confidence.";
+
+export const metadata = {
+  title: "About",
+  description,
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    type: "website",
+    url: "/about",
+    siteName,
+    title: `About ${siteName}`,
+    description,
+  },
+};
+
 export default function AboutPage() {
   return (
     <>
@@ -5,8 +27,8 @@ export default function AboutPage() {
         <div className="container">
           <h1>About TechNest Academy</h1>
           <p>
-            We are a fictional learning-focused technology blog created to help
-            beginners explore coding topics with confidence and curiosity.
+            We are a learning-focused technology blog helping beginners explore
+            coding topics with confidence and curiosity.
           </p>
         </div>
       </section>
@@ -21,9 +43,27 @@ export default function AboutPage() {
             clear step at a time.
           </p>
           <p>
-            Our articles cover web development, JavaScript, React, Next.js, CSS,
-            HTML, freelancing, AI tools, and practical programming habits. Each
-            piece is designed to be useful on its own and easy to revisit later.
+            Our articles cover{" "}
+            <Link href="/blog/getting-started-with-web-development">
+              web development
+            </Link>
+            ,{" "}
+            <Link href="/blog/javascript-habits-that-save-time">JavaScript</Link>
+            ,{" "}
+            <Link href="/blog/react-components-for-beginners">React</Link>,{" "}
+            <Link href="/blog/why-nextjs-is-popular">Next.js</Link>,{" "}
+            <Link href="/blog/css-layouts-that-feel-modern">CSS</Link>,{" "}
+            <Link href="/blog/html-semantics-made-simple">HTML</Link>,{" "}
+            <Link href="/blog/freelancing-tips-for-new-developers">
+              freelancing
+            </Link>
+            , <Link href="/blog/ai-tools-for-everyday-coding">AI tools</Link>,
+            and{" "}
+            <Link href="/blog/programming-tips-for-faster-learning">
+              practical programming habits
+            </Link>
+            . Each piece is designed to be useful on its own and easy to revisit
+            later.
           </p>
           <h2>What we believe</h2>
           <p>
@@ -37,16 +77,16 @@ export default function AboutPage() {
 
         <div className="about-stats">
           <div className="stat-block">
-            <strong>10</strong>
-            Sample articles ready to explore across beginner-friendly topics.
+            <strong>{posts.length}</strong>
+            Articles to explore across beginner-friendly topics.
           </div>
           <div className="stat-block">
-            <strong>10</strong>
+            <strong>{categories.length}</strong>
             Categories spanning code, design foundations, and career skills.
           </div>
           <div className="stat-block">
-            <strong>100%</strong>
-            Frontend demo — no accounts, no backend, no database required.
+            <strong>Free</strong>
+            Every guide is free to read, with no sign-up required.
           </div>
         </div>
       </section>

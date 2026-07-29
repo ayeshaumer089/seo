@@ -2,6 +2,24 @@ import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import Newsletter from "@/components/Newsletter";
 import { categories, getLatestPosts } from "@/data/posts";
+import { siteDescription, siteName } from "@/data/site";
+
+export const metadata = {
+  // `title` is intentionally omitted so the layout's `title.default` is used
+  // verbatim, rather than being run through the "%s | TechNest Academy"
+  // template and producing a doubled brand name.
+  description: siteDescription,
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName,
+    title: `${siteName} — Beginner-Friendly Web Development Guides`,
+    description: siteDescription,
+  },
+};
 
 export default function HomePage() {
   const latestPosts = getLatestPosts(6);
@@ -64,8 +82,8 @@ export default function HomePage() {
           <div>
             <h2 className="section-heading">Built for learners who want clarity</h2>
             <p className="section-intro">
-              TechNest Academy is a fictional technology blog created to make
-              coding topics approachable. We focus on simple explanations,
+              TechNest Academy publishes practical guides on web development,
+              JavaScript, React, and Next.js. We focus on simple explanations,
               useful examples, and a calm learning pace.
             </p>
             <div className="hero-actions">

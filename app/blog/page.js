@@ -1,5 +1,24 @@
 import BlogCard from "@/components/BlogCard";
 import { posts } from "@/data/posts";
+import { siteName } from "@/data/site";
+
+const description =
+  "Every TechNest Academy article in one place — beginner guides to web development, JavaScript, React, Next.js, CSS, HTML and freelancing.";
+
+export const metadata = {
+  title: "Blog",
+  description,
+  alternates: {
+    canonical: "/blog",
+  },
+  openGraph: {
+    type: "website",
+    url: "/blog",
+    siteName,
+    title: `Blog | ${siteName}`,
+    description,
+  },
+};
 
 export default function BlogPage() {
   const sortedPosts = [...posts].sort(
@@ -12,8 +31,9 @@ export default function BlogPage() {
         <div className="container">
           <h1>Blog</h1>
           <p>
-            Browse all TechNest Academy articles. Each post includes headings,
-            examples, an image, an author, and a publish date.
+            Browse all {posts.length} TechNest Academy articles — practical,
+            beginner-friendly guides to web development, JavaScript, React,
+            Next.js, CSS, HTML, and freelancing.
           </p>
         </div>
       </section>

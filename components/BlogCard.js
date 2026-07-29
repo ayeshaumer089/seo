@@ -4,8 +4,10 @@ import { formatDate } from "@/data/posts";
 export default function BlogCard({ post }) {
   return (
     <article className="blog-card">
+      {/* The image is this link's only content, so it needs a real alt to
+          give the link an accessible name. */}
       <Link href={`/blog/${post.slug}`} className="blog-card-media">
-        <img src={post.image} alt="" />
+        <img src={post.image} alt={post.title} loading="lazy" />
       </Link>
 
       <div className="blog-card-body">

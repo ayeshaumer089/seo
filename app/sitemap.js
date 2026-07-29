@@ -1,40 +1,57 @@
 import { posts } from "@/data/posts";
+import { absoluteUrl } from "@/data/site";
 
-const baseUrl = "https://testjstutorial.netlify.app";
+/**
+ * Google discounts `lastmod` when every URL claims to have changed on the
+ * current build date, so static pages use a fixed date and content pages
+ * report the date of the content itself.
+ */
+const SITE_LAUNCH_DATE = new Date("2026-03-12");
+
+function postDate(post) {
+  return new Date(post.updated ?? post.date);
+}
+
+function latestPostDate() {
+  const timestamps = posts.map((post) => postDate(post).getTime());
+  return new Date(Math.max(...timestamps));
+}
 
 export default function sitemap() {
+  const newest = latestPostDate();
+
   const staticPages = [
     {
-      url: `${baseUrl}/`,
-      lastModified: new Date(),
+      url: absoluteUrl("/"),
+      lastModified: newest,
       changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/about`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
+      url: absoluteUrl("/blog"),
+      lastModified: newest,
       changeFrequency: "weekly",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
+      url: absoluteUrl("/about"),
+      lastModified: SITE_LAUNCH_DATE,
+      changeFrequency: "yearly",
+      priority: 0.5,
+    },
+    {
+      url: absoluteUrl("/contact"),
+      lastModified: SITE_LAUNCH_DATE,
+      changeFrequency: "yearly",
+      priority: 0.4,
     },
   ];
 
   const blogPages = posts.map((post) => ({
-    url: `${baseUrl}/blog/${post.slug}`,
-    lastModified: new Date(post.date),
+    url: absoluteUrl(`/blog/${post.slug}`),
+    lastModified: postDate(post),
     changeFrequency: "monthly",
-    priority: post.slug === "advanced-react-tutorial" ? 0.8 : 0.7,
+    priority: 0.8,
   }));
 
   return [...staticPages, ...blogPages];

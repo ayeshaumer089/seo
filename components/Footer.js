@@ -9,7 +9,7 @@ export default function Footer() {
         <div>
           <p className="footer-brand">TechNest Academy</p>
           <p className="footer-text">
-            A fictional technology blog for learners exploring web development,
+            A technology blog for learners exploring web development,
             programming tips, and modern digital skills.
           </p>
         </div>
@@ -34,17 +34,33 @@ export default function Footer() {
 
         <div>
           <p className="footer-heading">Topics</p>
+          {/* Linked rather than plain text so every page passes crawlable
+              links down to individual articles. */}
           <ul className="footer-links">
-            <li>Web Development</li>
-            <li>JavaScript</li>
-            <li>React &amp; Next.js</li>
-            <li>Programming Tips</li>
+            <li>
+              <Link href="/blog/getting-started-with-web-development">
+                Web Development
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/javascript-habits-that-save-time">
+                JavaScript
+              </Link>
+            </li>
+            <li>
+              <Link href="/blog/why-nextjs-is-popular">React &amp; Next.js</Link>
+            </li>
+            <li>
+              <Link href="/blog/programming-tips-for-faster-learning">
+                Programming Tips
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
 
       <div className="container footer-bottom">
-        <p>&copy; {year} TechNest Academy. Built for learning practice.</p>
+        <p>&copy; {year} TechNest Academy. All rights reserved.</p>
       </div>
     </footer>
   );
