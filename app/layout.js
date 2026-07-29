@@ -1,4 +1,5 @@
 import { Figtree, Syne } from "next/font/google";
+import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { siteDescription, siteName, siteUrl } from "@/data/site";
@@ -15,6 +16,8 @@ const figtree = Figtree({
   variable: "--font-body",
   weight: ["400", "500", "600", "700"],
 });
+
+const GA_MEASUREMENT_ID = "G-4MZPJY65VF";
 
 export const metadata = {
   // Lets every child segment use relative URLs for canonical and OG images.
@@ -78,6 +81,21 @@ const websiteSchema = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${syne.variable} ${figtree.variable}`}>
+      <head>
+        {/* Google tag (gtag.js) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_MEASUREMENT_ID}');
+          `}
+        </Script>
+      </head>
       <body>
         <script
           type="application/ld+json"
