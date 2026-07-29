@@ -2,7 +2,14 @@ import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import Newsletter from "@/components/Newsletter";
 import { categories, getLatestPosts } from "@/data/posts";
-import { absoluteUrl, siteDescription, siteName, siteTitle } from "@/data/site";
+import {
+  absoluteUrl,
+  defaultOgImage,
+  siteDescription,
+  siteName,
+  siteOgDescription,
+  siteTitle,
+} from "@/data/site";
 
 export const metadata = {
   // `title` is intentionally omitted so the layout's `title.default` (siteTitle)
@@ -17,7 +24,15 @@ export const metadata = {
     url: absoluteUrl("/"),
     siteName,
     title: siteTitle,
-    description: siteDescription,
+    description: siteOgDescription,
+    locale: "en_US",
+    images: [defaultOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteTitle,
+    description: siteOgDescription,
+    images: [defaultOgImage.url],
   },
 };
 

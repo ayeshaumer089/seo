@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { categories, posts } from "@/data/posts";
-import { absoluteUrl, siteName } from "@/data/site";
+import { aboutOgImage, absoluteUrl, siteName } from "@/data/site";
 
 const description =
   "TechNest Academy is a learning-focused technology blog helping beginners explore web development, JavaScript, React and CSS with confidence.";
@@ -17,6 +17,14 @@ export const metadata = {
     siteName,
     title: `About ${siteName}`,
     description,
+    locale: "en_US",
+    images: [aboutOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `About ${siteName}`,
+    description,
+    images: [aboutOgImage.url],
   },
 };
 

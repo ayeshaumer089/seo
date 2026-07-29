@@ -34,11 +34,19 @@ export async function generateMetadata({ params }) {
       siteName,
       title: post.title,
       description: post.excerpt,
+      locale: "en_US",
       publishedTime: post.date,
       modifiedTime: post.updated ?? post.date,
       authors: [post.author],
       section: post.category,
-      images: [{ url: post.image, width: 1200, height: 700, alt: post.title }],
+      images: [
+        {
+          url: post.image,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",

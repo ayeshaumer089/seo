@@ -8,8 +8,10 @@ import {
   siteDescription,
   siteKeywords,
   siteName,
+  siteOgDescription,
   siteTitle,
   siteUrl,
+  defaultOgImage,
 } from "@/data/site";
 import "./globals.css";
 
@@ -62,12 +64,15 @@ export const metadata = {
     siteName,
     locale: "en_US",
     title: siteTitle,
-    description: siteDescription,
+    description: siteOgDescription,
+    url: siteUrl,
+    images: [defaultOgImage],
   },
   twitter: {
     card: "summary_large_image",
     title: siteTitle,
-    description: siteDescription,
+    description: siteOgDescription,
+    images: [defaultOgImage.url],
   },
   verification: {
     google: "q3tEwqck3HyABBgXcVsAWfmWZw2kOaMlp6GaxzyzdfQ",

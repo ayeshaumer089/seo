@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import { absoluteUrl, siteName } from "@/data/site";
+import { absoluteUrl, contactOgImage, siteName } from "@/data/site";
 
 // TODO: swap this for a real, monitored inbox before relying on the page.
 const contactEmail = "hello@technest.academy";
@@ -20,6 +20,14 @@ export const metadata = {
     siteName,
     title: `Contact | ${siteName}`,
     description,
+    locale: "en_US",
+    images: [contactOgImage],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `Contact | ${siteName}`,
+    description,
+    images: [contactOgImage.url],
   },
 };
 
