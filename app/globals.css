@@ -368,6 +368,46 @@ textarea {
   font-size: 0.92rem;
 }
 
+.home-nav-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.home-nav-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  padding: 1.25rem 1.35rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.55);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.home-nav-card:hover {
+  border-color: var(--brand);
+  transform: translateY(-2px);
+}
+
+.home-nav-label {
+  font-family: var(--font-display), "Syne", sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+.home-nav-text {
+  color: var(--ink-soft);
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.home-section-cta {
+  margin-top: 1.5rem;
+}
+
 .categories-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -765,6 +805,10 @@ textarea {
 
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-nav-links {
+    grid-template-columns: 1fr;
   }
 
   .blog-page-grid {
