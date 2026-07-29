@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { categories, posts } from "@/data/posts";
-import { aboutOgImage, absoluteUrl, siteName } from "@/data/site";
+import { aboutOgImage, absoluteUrl, siteName, twitterCard } from "@/data/site";
 
 const description =
   "TechNest Academy is a learning-focused technology blog helping beginners explore web development, JavaScript, React and CSS with confidence.";
@@ -20,12 +20,11 @@ export const metadata = {
     locale: "en_US",
     images: [aboutOgImage],
   },
-  twitter: {
-    card: "summary_large_image",
+  twitter: twitterCard({
     title: `About ${siteName}`,
     description,
-    images: [aboutOgImage.url],
-  },
+    image: aboutOgImage,
+  }),
 };
 
 export default function AboutPage() {

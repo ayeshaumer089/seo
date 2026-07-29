@@ -68,6 +68,28 @@ export const contactOgImage = {
   alt: "Contact TechNest Academy",
 };
 
+/**
+ * Optional X (Twitter) handles for twitter:site / twitter:creator.
+ * Update these when a real brand account exists.
+ */
+export const twitterSite = "@TechNestAcademy";
+export const twitterCreator = "@TechNestAcademy";
+
+/**
+ * Shared Twitter Card fields — reuses the same image as Open Graph.
+ * Prefer summary_large_image for professional link previews.
+ */
+export function twitterCard({ title, description, image }) {
+  return {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [typeof image === "string" ? image : image.url],
+    site: twitterSite,
+    creator: twitterCreator,
+  };
+}
+
 /** Builds an absolute URL for a site-relative path. */
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();

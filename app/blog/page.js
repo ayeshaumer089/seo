@@ -1,6 +1,6 @@
 import BlogCard from "@/components/BlogCard";
 import { posts } from "@/data/posts";
-import { absoluteUrl, blogOgImage, siteName } from "@/data/site";
+import { absoluteUrl, blogOgImage, siteName, twitterCard } from "@/data/site";
 
 const description =
   "Every TechNest Academy article in one place — beginner guides to web development, JavaScript, React, Next.js, CSS, HTML and freelancing.";
@@ -20,12 +20,11 @@ export const metadata = {
     locale: "en_US",
     images: [blogOgImage],
   },
-  twitter: {
-    card: "summary_large_image",
+  twitter: twitterCard({
     title: `Blog | ${siteName}`,
     description,
-    images: [blogOgImage.url],
-  },
+    image: blogOgImage,
+  }),
 };
 
 export default function BlogPage() {

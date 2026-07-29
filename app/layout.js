@@ -12,6 +12,7 @@ import {
   siteTitle,
   siteUrl,
   defaultOgImage,
+  twitterCard,
 } from "@/data/site";
 import "./globals.css";
 
@@ -68,12 +69,12 @@ export const metadata = {
     url: siteUrl,
     images: [defaultOgImage],
   },
-  twitter: {
-    card: "summary_large_image",
+  // Twitter Card reuses the same Open Graph image (best practice).
+  twitter: twitterCard({
     title: siteTitle,
     description: siteOgDescription,
-    images: [defaultOgImage.url],
-  },
+    image: defaultOgImage,
+  }),
   verification: {
     google: "q3tEwqck3HyABBgXcVsAWfmWZw2kOaMlp6GaxzyzdfQ",
   },

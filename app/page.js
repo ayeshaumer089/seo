@@ -9,6 +9,7 @@ import {
   siteName,
   siteOgDescription,
   siteTitle,
+  twitterCard,
 } from "@/data/site";
 
 export const metadata = {
@@ -28,12 +29,11 @@ export const metadata = {
     locale: "en_US",
     images: [defaultOgImage],
   },
-  twitter: {
-    card: "summary_large_image",
+  twitter: twitterCard({
     title: siteTitle,
     description: siteOgDescription,
-    images: [defaultOgImage.url],
-  },
+    image: defaultOgImage,
+  }),
 };
 
 export default function HomePage() {

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDate, getPostBySlug, getRelatedPosts, posts } from "@/data/posts";
-import { absoluteUrl, siteName, siteUrl } from "@/data/site";
+import { absoluteUrl, siteName, siteUrl, twitterCard } from "@/data/site";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -19,6 +19,12 @@ export async function generateMetadata({ params }) {
   }
 
   const url = absoluteUrl(`/blog/${post.slug}`);
+  const ogImage = {
+    url: post.image,
+    width: 1200,
+    height: 630,
+    alt: post.title,
+  };
 
   return {
     title: post.title,
@@ -39,21 +45,14 @@ export async function generateMetadata({ params }) {
       modifiedTime: post.updated ?? post.date,
       authors: [post.author],
       section: post.category,
-      images: [
-        {
-          url: post.image,
-          width: 1200,
-          height: 630,
-          alt: post.title,
-        },
-      ],
+      images: [ogImage],
     },
-    twitter: {
-      card: "summary_large_image",
+    // Same cover image as Open Graph (easier to maintain).
+    twitter: twitterCard({
       title: post.title,
       description: post.excerpt,
-      images: [post.image],
-    },
+      image: ogImage,
+    }),
   };
 }
 
