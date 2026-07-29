@@ -2,7 +2,7 @@ import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import Newsletter from "@/components/Newsletter";
 import { categories, getLatestPosts } from "@/data/posts";
-import { siteDescription, siteName, siteTitle } from "@/data/site";
+import { absoluteUrl, siteDescription, siteName, siteTitle } from "@/data/site";
 
 export const metadata = {
   // `title` is intentionally omitted so the layout's `title.default` (siteTitle)
@@ -10,11 +10,11 @@ export const metadata = {
   // template and producing a doubled brand name.
   description: siteDescription,
   alternates: {
-    canonical: "/",
+    canonical: absoluteUrl("/"),
   },
   openGraph: {
     type: "website",
-    url: "/",
+    url: absoluteUrl("/"),
     siteName,
     title: siteTitle,
     description: siteDescription,

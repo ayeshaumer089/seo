@@ -1,6 +1,6 @@
 import BlogCard from "@/components/BlogCard";
 import { posts } from "@/data/posts";
-import { siteName } from "@/data/site";
+import { absoluteUrl, siteName } from "@/data/site";
 
 const description =
   "Every TechNest Academy article in one place — beginner guides to web development, JavaScript, React, Next.js, CSS, HTML and freelancing.";
@@ -9,11 +9,11 @@ export const metadata = {
   title: "Blog",
   description,
   alternates: {
-    canonical: "/blog",
+    canonical: absoluteUrl("/blog"),
   },
   openGraph: {
     type: "website",
-    url: "/blog",
+    url: absoluteUrl("/blog"),
     siteName,
     title: `Blog | ${siteName}`,
     description,

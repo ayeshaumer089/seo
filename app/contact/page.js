@@ -1,6 +1,6 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import { siteName } from "@/data/site";
+import { absoluteUrl, siteName } from "@/data/site";
 
 // TODO: swap this for a real, monitored inbox before relying on the page.
 const contactEmail = "hello@technest.academy";
@@ -12,11 +12,11 @@ export const metadata = {
   title: "Contact",
   description,
   alternates: {
-    canonical: "/contact",
+    canonical: absoluteUrl("/contact"),
   },
   openGraph: {
     type: "website",
-    url: "/contact",
+    url: absoluteUrl("/contact"),
     siteName,
     title: `Contact | ${siteName}`,
     description,

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const url = `/blog/${post.slug}`;
+  const url = absoluteUrl(`/blog/${post.slug}`);
 
   return {
     title: post.title,

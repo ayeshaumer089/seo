@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { categories, posts } from "@/data/posts";
-import { siteName } from "@/data/site";
+import { absoluteUrl, siteName } from "@/data/site";
 
 const description =
   "TechNest Academy is a learning-focused technology blog helping beginners explore web development, JavaScript, React and CSS with confidence.";
@@ -9,11 +9,11 @@ export const metadata = {
   title: "About",
   description,
   alternates: {
-    canonical: "/about",
+    canonical: absoluteUrl("/about"),
   },
   openGraph: {
     type: "website",
-    url: "/about",
+    url: absoluteUrl("/about"),
     siteName,
     title: `About ${siteName}`,
     description,
