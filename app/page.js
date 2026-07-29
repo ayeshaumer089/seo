@@ -2,11 +2,11 @@ import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import Newsletter from "@/components/Newsletter";
 import { categories, getLatestPosts } from "@/data/posts";
-import { siteDescription, siteName } from "@/data/site";
+import { siteDescription, siteName, siteTitle } from "@/data/site";
 
 export const metadata = {
-  // `title` is intentionally omitted so the layout's `title.default` is used
-  // verbatim, rather than being run through the "%s | TechNest Academy"
+  // `title` is intentionally omitted so the layout's `title.default` (siteTitle)
+  // is used verbatim, rather than being run through the "%s | TechNest Academy"
   // template and producing a doubled brand name.
   description: siteDescription,
   alternates: {
@@ -16,7 +16,7 @@ export const metadata = {
     type: "website",
     url: "/",
     siteName,
-    title: `${siteName} — Beginner-Friendly Web Development Guides`,
+    title: siteTitle,
     description: siteDescription,
   },
 };

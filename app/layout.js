@@ -2,7 +2,15 @@ import { Figtree, Syne } from "next/font/google";
 import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { siteDescription, siteName, siteUrl } from "@/data/site";
+import {
+  siteAuthor,
+  siteCategory,
+  siteDescription,
+  siteKeywords,
+  siteName,
+  siteTitle,
+  siteUrl,
+} from "@/data/site";
 import "./globals.css";
 
 const syne = Syne({
@@ -23,12 +31,14 @@ export const metadata = {
   // Lets every child segment use relative URLs for canonical and OG images.
   metadataBase: new URL(siteUrl),
   title: {
-    default: `${siteName} — Beginner-Friendly Web Development Guides`,
+    default: siteTitle,
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
+  keywords: siteKeywords,
   applicationName: siteName,
-  authors: [{ name: siteName, url: siteUrl }],
+  category: siteCategory,
+  authors: [{ name: siteAuthor, url: siteUrl }],
   creator: siteName,
   publisher: siteName,
   // NOTE: `alternates` is deliberately NOT set here. Metadata is shallow-merged
@@ -51,12 +61,12 @@ export const metadata = {
     type: "website",
     siteName,
     locale: "en_US",
-    title: `${siteName} — Beginner-Friendly Web Development Guides`,
+    title: siteTitle,
     description: siteDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteName} — Beginner-Friendly Web Development Guides`,
+    title: siteTitle,
     description: siteDescription,
   },
   verification: {
