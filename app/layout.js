@@ -19,7 +19,7 @@ const figtree = Figtree({
 export const metadata = {
   title: "TechNest Academy",
   verification: {
-    google: "q3tEwqck3HyABBgXcVsAWfmWZw2kOaMlp6GaxzyzdfQ",
+    google: "MiOhOMIANGzYCRUvDs0Gh-efM6EaOiYJnLKUOFfY7Yo",
   },
 };
 
