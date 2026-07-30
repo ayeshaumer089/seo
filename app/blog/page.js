@@ -1,5 +1,7 @@
 import BlogCard from "@/components/BlogCard";
+import JsonLd from "@/components/JsonLd";
 import { posts } from "@/data/posts";
+import { blogSchema } from "@/data/schema";
 import {
   absoluteUrl,
   blogOgImage,
@@ -41,6 +43,7 @@ export default function BlogPage() {
 
   return (
     <>
+      <JsonLd data={blogSchema()} />
       <section className="page-hero">
         <div className="container">
           <h1>Blog</h1>

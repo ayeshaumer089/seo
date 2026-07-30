@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-label="TechNest Academy">
+  <rect width="512" height="512" rx="96" fill="#0f766e"/>
+  <circle cx="256" cy="256" r="118" fill="none" stroke="#ecfdf5" stroke-width="28"/>
+  <circle cx="256" cy="256" r="42" fill="#ecfdf5"/>
+  <text x="256" y="430" text-anchor="middle" font-family="Arial, sans-serif" font-size="56" font-weight="700" fill="#ecfdf5">TN</text>
+</svg>

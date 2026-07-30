@@ -2,6 +2,8 @@ import { Figtree, Syne } from "next/font/google";
 import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema, websiteSchema } from "@/data/schema";
 import {
   siteAuthor,
   siteCategory,
@@ -71,20 +73,6 @@ export const metadata = {
   },
 };
 
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: siteName,
-  url: siteUrl,
-  description: siteDescription,
-  inLanguage: "en",
-  publisher: {
-    "@type": "Organization",
-    name: siteName,
-    url: siteUrl,
-  },
-};
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${syne.variable} ${figtree.variable}`}>
@@ -104,10 +92,9 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
       <body>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
-        />
+        {/* Organization + WebSite structured data (JSON-LD) */}
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
         <Header />
         <main>{children}</main>
         <Footer />

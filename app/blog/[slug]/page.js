@@ -2,6 +2,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDate, getPostBySlug, getRelatedPosts, posts } from "@/data/posts";
 import { absoluteUrl, publicRobots, siteName, siteUrl, twitterCard } from "@/data/site";
+import { siteLogoUrl } from "@/data/schema";
+import JsonLd from "@/components/JsonLd";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -87,6 +89,10 @@ export default async function BlogPostPage({ params }) {
       "@type": "Organization",
       name: siteName,
       url: siteUrl,
+      logo: {
+        "@type": "ImageObject",
+        url: siteLogoUrl,
+      },
     },
     mainEntityOfPage: {
       "@type": "WebPage",
@@ -111,14 +117,8 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <article className="container article-page">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
 
       <section className="page-hero" style={{ paddingBottom: 0 }}>
         <nav aria-label="Breadcrumb" className="breadcrumb">

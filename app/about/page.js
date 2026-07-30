@@ -1,5 +1,7 @@
 import Link from "next/link";
+import JsonLd from "@/components/JsonLd";
 import { categories, posts } from "@/data/posts";
+import { organizationSchema } from "@/data/schema";
 import {
   aboutOgImage,
   absoluteUrl,
@@ -37,6 +39,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={organizationSchema()} />
       <section className="page-hero">
         <div className="container">
           <h1>About TechNest Academy</h1>

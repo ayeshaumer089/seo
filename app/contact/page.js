@@ -1,5 +1,7 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import JsonLd from "@/components/JsonLd";
+import { organizationSchema } from "@/data/schema";
 import {
   absoluteUrl,
   contactOgImage,
@@ -40,6 +42,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={organizationSchema()} />
       <section className="page-hero">
         <div className="container">
           <h1>Contact</h1>
