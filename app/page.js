@@ -105,13 +105,13 @@ export default function HomePage() {
             </p>
             <div className="hero-actions">
               <Link href="/about" className="btn btn-primary">
-                Learn More
+                About TechNest Academy
               </Link>
               <Link href="/blog" className="btn btn-secondary">
-                View Blog
+                Browse all articles
               </Link>
               <Link href="/contact" className="btn btn-secondary">
-                Contact Us
+                Contact TechNest Academy
               </Link>
             </div>
           </div>
