@@ -1,13 +1,21 @@
+import Image from "next/image";
 import Link from "next/link";
 import { formatDate } from "@/data/posts";
 
-export default function BlogCard({ post }) {
+export default function BlogCard({ post, priority = false }) {
   return (
     <article className="blog-card">
-      {/* The image is this link's only content, so it needs a real alt to
-          give the link an accessible name. */}
+      {/* Image link needs a real alt so the link has an accessible name. */}
       <Link href={`/blog/${post.slug}`} className="blog-card-media">
-        <img src={post.image} alt={post.title} loading="lazy" />
+        <Image
+          src={post.image}
+          alt={post.title}
+          width={1200}
+          height={700}
+          sizes="(max-width: 768px) 100vw, 33vw"
+          loading={priority ? "eager" : "lazy"}
+          priority={priority}
+        />
       </Link>
 
       <div className="blog-card-body">

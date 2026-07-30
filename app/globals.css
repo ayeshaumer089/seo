@@ -187,7 +187,7 @@ textarea {
   color: #f7fffe;
   background:
     linear-gradient(120deg, rgba(7, 48, 51, 0.78), rgba(13, 115, 119, 0.45)),
-    url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1800&h=1200&fit=crop")
+    url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=800&fit=crop&q=60")
       center / cover no-repeat;
   animation: heroFade 1s ease both;
 }

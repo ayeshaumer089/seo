@@ -41,8 +41,22 @@ export const metadata = {
 export default function HomePage() {
   const latestPosts = getLatestPosts(6);
 
+  // Same label + different URL fails Lighthouse "identical links same purpose"
+  // (footer Topics already uses these names for specific articles).
+  const categoryHrefs = {
+    "Web Development": "/blog/getting-started-with-web-development",
+    JavaScript: "/blog/javascript-habits-that-save-time",
+    "Programming Tips": "/blog/programming-tips-for-faster-learning",
+  };
+
   return (
     <>
+      <link
+        rel="preload"
+        as="image"
+        href="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1200&h=800&fit=crop&q=60"
+        fetchPriority="high"
+      />
       <section className="hero">
         <div className="hero-content">
           <p className="hero-brand">TechNest Academy</p>
@@ -56,10 +70,10 @@ export default function HomePage() {
               Read the Blog
             </Link>
             <Link href="/about" className="btn btn-secondary">
-              About Us
+              About TechNest Academy
             </Link>
             <Link href="/contact" className="btn btn-secondary">
-              Contact
+              Contact TechNest Academy
             </Link>
           </div>
         </div>
@@ -127,8 +141,8 @@ export default function HomePage() {
             learning strategies.
           </p>
           <div className="posts-grid">
-            {latestPosts.map((post) => (
-              <BlogCard key={post.id} post={post} />
+            {latestPosts.map((post, index) => (
+              <BlogCard key={post.id} post={post} priority={index === 0} />
             ))}
           </div>
           <div className="home-section-cta">
@@ -147,7 +161,11 @@ export default function HomePage() {
           </p>
           <div className="categories-grid">
             {categories.map((category) => (
-              <Link key={category} href="/blog" className="category-item">
+              <Link
+                key={category}
+                href={categoryHrefs[category] ?? "/blog"}
+                className="category-item"
+              >
                 {category}
               </Link>
             ))}
