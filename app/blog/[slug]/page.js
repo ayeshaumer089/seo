@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { formatDate, getPostBySlug, getRelatedPosts, posts } from "@/data/posts";
-import { absoluteUrl, siteName, siteUrl, twitterCard } from "@/data/site";
+import { absoluteUrl, publicRobots, siteName, siteUrl, twitterCard } from "@/data/site";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -31,6 +31,7 @@ export async function generateMetadata({ params }) {
     description: post.excerpt,
     keywords: [post.category, "tutorial", "web development", "beginners"],
     authors: [{ name: post.author }],
+    robots: publicRobots,
     alternates: {
       canonical: url,
     },

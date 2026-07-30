@@ -5,6 +5,7 @@ import { categories, getLatestPosts } from "@/data/posts";
 import {
   absoluteUrl,
   defaultOgImage,
+  publicRobots,
   siteDescription,
   siteName,
   siteOgDescription,
@@ -17,6 +18,7 @@ export const metadata = {
   // is used verbatim, rather than being run through the "%s | TechNest Academy"
   // template and producing a doubled brand name.
   description: siteDescription,
+  robots: publicRobots,
   alternates: {
     canonical: absoluteUrl("/"),
   },

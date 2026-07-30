@@ -1,6 +1,12 @@
 import Link from "next/link";
 import { categories, posts } from "@/data/posts";
-import { aboutOgImage, absoluteUrl, siteName, twitterCard } from "@/data/site";
+import {
+  aboutOgImage,
+  absoluteUrl,
+  publicRobots,
+  siteName,
+  twitterCard,
+} from "@/data/site";
 
 const description =
   "TechNest Academy is a learning-focused technology blog helping beginners explore web development, JavaScript, React and CSS with confidence.";
@@ -8,6 +14,7 @@ const description =
 export const metadata = {
   title: "About",
   description,
+  robots: publicRobots,
   alternates: {
     canonical: absoluteUrl("/about"),
   },

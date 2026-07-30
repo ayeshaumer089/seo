@@ -12,6 +12,7 @@ import {
   siteTitle,
   siteUrl,
   defaultOgImage,
+  publicRobots,
   twitterCard,
 } from "@/data/site";
 import "./globals.css";
@@ -49,17 +50,7 @@ export const metadata = {
   // inherited by every page that doesn't override it — telling Google that
   // /about, /blog and /contact are all duplicates of the homepage. Each page
   // declares its own canonical instead.
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-      "max-video-preview": -1,
-    },
-  },
+  robots: publicRobots,
   openGraph: {
     type: "website",
     siteName,

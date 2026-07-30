@@ -1,9 +1,10 @@
 import Link from "next/link";
+import { noIndexRobots } from "@/data/site";
 
 export const metadata = {
   title: "Page not found",
   // Keep 404s out of the index so they don't consume crawl budget.
-  robots: { index: false, follow: true },
+  robots: noIndexRobots,
 };
 
 export default function NotFound() {

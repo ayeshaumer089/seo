@@ -1,6 +1,12 @@
 import BlogCard from "@/components/BlogCard";
 import { posts } from "@/data/posts";
-import { absoluteUrl, blogOgImage, siteName, twitterCard } from "@/data/site";
+import {
+  absoluteUrl,
+  blogOgImage,
+  publicRobots,
+  siteName,
+  twitterCard,
+} from "@/data/site";
 
 const description =
   "Every TechNest Academy article in one place — beginner guides to web development, JavaScript, React, Next.js, CSS, HTML and freelancing.";
@@ -8,6 +14,7 @@ const description =
 export const metadata = {
   title: "Blog",
   description,
+  robots: publicRobots,
   alternates: {
     canonical: absoluteUrl("/blog"),
   },

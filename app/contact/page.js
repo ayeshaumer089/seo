@@ -1,6 +1,12 @@
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
-import { absoluteUrl, contactOgImage, siteName, twitterCard } from "@/data/site";
+import {
+  absoluteUrl,
+  contactOgImage,
+  publicRobots,
+  siteName,
+  twitterCard,
+} from "@/data/site";
 
 // TODO: swap this for a real, monitored inbox before relying on the page.
 const contactEmail = "hello@technest.academy";
@@ -11,6 +17,7 @@ const description =
 export const metadata = {
   title: "Contact",
   description,
+  robots: publicRobots,
   alternates: {
     canonical: absoluteUrl("/contact"),
   },

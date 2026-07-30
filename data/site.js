@@ -90,6 +90,54 @@ export function twitterCard({ title, description, image }) {
   };
 }
 
+/**
+ * Default robots for public pages (Home, Blog, Articles, About, Contact).
+ * index + follow, with Google-friendly preview settings.
+ */
+export const publicRobots = {
+  index: true,
+  follow: true,
+  googleBot: {
+    index: true,
+    follow: true,
+    noimageindex: false,
+    "max-video-preview": -1,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+  },
+};
+
+/**
+ * Private / app pages that must not appear in search (login, dashboard, admin).
+ */
+export const privateRobots = {
+  index: false,
+  follow: false,
+  googleBot: {
+    index: false,
+    follow: false,
+    noimageindex: true,
+    "max-video-preview": 0,
+    "max-image-preview": "none",
+    "max-snippet": 0,
+  },
+};
+
+/**
+ * Transactional pages (checkout, thank-you): hide from index, still follow links.
+ */
+export const noIndexRobots = {
+  index: false,
+  follow: true,
+  googleBot: {
+    index: false,
+    follow: true,
+    "max-image-preview": "none",
+    "max-snippet": 0,
+    "max-video-preview": 0,
+  },
+};
+
 /** Builds an absolute URL for a site-relative path. */
 export function absoluteUrl(path = "/") {
   return new URL(path, siteUrl).toString();
