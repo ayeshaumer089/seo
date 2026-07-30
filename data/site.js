@@ -4,7 +4,7 @@
  * canonical host is never duplicated or allowed to drift.
  */
 
-export const siteUrl = "https://testjstutorial.netlify.app";
+export const siteUrl = "https://testnestjstutorial.netlify.app";
 
 export const siteName = "TechNest Academy";
 
