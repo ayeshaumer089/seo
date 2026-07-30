@@ -147,12 +147,7 @@ export default function HomePage() {
           </p>
           <div className="categories-grid">
             {categories.map((category) => (
-              <Link
-                key={category}
-                href="/blog"
-                className="category-item"
-                aria-label={`Browse ${category} articles on the blog`}
-              >
+              <Link key={category} href="/blog" className="category-item">
                 {category}
               </Link>
             ))}
