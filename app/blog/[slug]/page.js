@@ -32,9 +32,12 @@ export async function generateMetadata({ params }) {
     alt: post.title,
   };
 
+  const title = post.metaTitle ?? post.title;
+  const description = post.metaDescription ?? post.excerpt;
+
   return {
-    title: post.title,
-    description: post.excerpt,
+    title,
+    description,
     keywords: [post.category, "tutorial", "web development", "beginners"],
     authors: [{ name: post.author }],
     robots: publicRobots,
@@ -45,8 +48,8 @@ export async function generateMetadata({ params }) {
       type: "article",
       url,
       siteName,
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       locale: "en_US",
       publishedTime: post.date,
       modifiedTime: post.updated ?? post.date,
@@ -56,8 +59,8 @@ export async function generateMetadata({ params }) {
     },
     // Same cover image as Open Graph (easier to maintain).
     twitter: twitterCard({
-      title: post.title,
-      description: post.excerpt,
+      title,
+      description,
       image: ogImage,
     }),
   };

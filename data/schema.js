@@ -66,6 +66,28 @@ export function blogSchema() {
 }
 
 /**
+ * ItemList of all tutorials — helps crawlers see the blog as a connected set of URLs.
+ */
+export function blogItemListSchema(posts) {
+  const sorted = [...posts].sort(
+    (a, b) => new Date(b.date) - new Date(a.date)
+  );
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${siteName} tutorials`,
+    numberOfItems: sorted.length,
+    itemListElement: sorted.map((post, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: post.title,
+      url: absoluteUrl(`/blog/${post.slug}`),
+    })),
+  };
+}
+
+/**
  * Article schema (JSON-LD) for individual blog posts.
  * @type Article — matches Google Article rich-result expectations.
  */

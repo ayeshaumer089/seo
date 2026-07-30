@@ -74,8 +74,11 @@ export default function AboutPage() {
             <Link href="/blog/freelancing-tips-for-new-developers">
               freelancing
             </Link>
-            , <Link href="/blog/ai-tools-for-everyday-coding">AI tools</Link>,
-            and{" "}
+            , <Link href="/blog/ai-tools-for-everyday-coding">AI tools</Link>,{" "}
+            <Link href="/blog/seo-basics-every-beginner-should-know">
+              SEO basics
+            </Link>
+            , and{" "}
             <Link href="/blog/programming-tips-for-faster-learning">
               practical programming habits
             </Link>

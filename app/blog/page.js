@@ -1,7 +1,8 @@
+import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import JsonLd from "@/components/JsonLd";
 import { posts } from "@/data/posts";
-import { blogSchema } from "@/data/schema";
+import { blogItemListSchema, blogSchema } from "@/data/schema";
 import {
   absoluteUrl,
   blogOgImage,
@@ -44,8 +45,14 @@ export default function BlogPage() {
   return (
     <>
       <JsonLd data={blogSchema()} />
+      <JsonLd data={blogItemListSchema(posts)} />
       <section className="page-hero">
         <div className="container">
+          <nav aria-label="Breadcrumb" className="breadcrumb">
+            <Link href="/">Home</Link>
+            <span aria-hidden="true"> / </span>
+            <span aria-current="page">Blog</span>
+          </nav>
           <h1>Blog</h1>
           <p>
             Browse all {posts.length} TechNest Academy articles — practical,

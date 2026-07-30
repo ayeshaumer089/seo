@@ -51,6 +51,11 @@ export default function Footer() {
               <Link href="/blog/why-nextjs-is-popular">React &amp; Next.js</Link>
             </li>
             <li>
+              <Link href="/blog/seo-basics-every-beginner-should-know">
+                SEO Basics
+              </Link>
+            </li>
+            <li>
               <Link href="/blog/programming-tips-for-faster-learning">
                 Programming Tips
               </Link>

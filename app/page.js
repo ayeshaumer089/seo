@@ -1,7 +1,7 @@
 import Link from "next/link";
 import BlogCard from "@/components/BlogCard";
 import Newsletter from "@/components/Newsletter";
-import { categories, getLatestPosts } from "@/data/posts";
+import { categories, getLatestPosts, posts } from "@/data/posts";
 import {
   absoluteUrl,
   defaultOgImage,
@@ -169,6 +169,29 @@ export default function HomePage() {
                 {category}
               </Link>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section" style={{ paddingTop: 0 }}>
+        <div className="container">
+          <h2 className="section-heading">All tutorials</h2>
+          <p className="section-intro">
+            A complete crawl path from the homepage to every article — open any
+            guide, then follow related links at the end of each post.
+          </p>
+          <ul className="home-tutorial-index">
+            {posts.map((post) => (
+              <li key={post.id}>
+                <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+                <span className="related-posts-category">{post.category}</span>
+              </li>
+            ))}
+          </ul>
+          <div className="home-section-cta">
+            <Link href="/blog" className="btn btn-secondary">
+              Open the full blog
+            </Link>
           </div>
         </div>
       </section>
