@@ -64,3 +64,69 @@ export function blogSchema() {
     },
   };
 }
+
+/**
+ * Article schema (JSON-LD) for individual blog posts.
+ * @type Article — matches Google Article rich-result expectations.
+ */
+export function articleSchema(post) {
+  const postUrl = absoluteUrl(`/blog/${post.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: post.title,
+    description: post.schemaDescription ?? post.excerpt,
+    image: [post.image],
+    author: {
+      "@type": "Organization",
+      name: post.author ?? siteName,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteName,
+      logo: {
+        "@type": "ImageObject",
+        url: siteLogoUrl,
+      },
+    },
+    datePublished: post.date,
+    dateModified: post.updated ?? post.date,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": postUrl,
+    },
+  };
+}
+
+/**
+ * BreadcrumbList schema for article pages.
+ */
+export function articleBreadcrumbSchema(post) {
+  const postUrl = absoluteUrl(`/blog/${post.slug}`);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: absoluteUrl("/"),
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Blog",
+        item: absoluteUrl("/blog"),
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: post.title,
+        item: postUrl,
+      },
+    ],
+  };
+}

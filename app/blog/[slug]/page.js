@@ -1,9 +1,12 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { formatDate, getPostBySlug, getRelatedPosts, posts } from "@/data/posts";
-import { absoluteUrl, publicRobots, siteName, siteUrl, twitterCard } from "@/data/site";
-import { siteLogoUrl } from "@/data/schema";
 import JsonLd from "@/components/JsonLd";
+import { formatDate, getPostBySlug, getRelatedPosts, posts } from "@/data/posts";
+import {
+  articleBreadcrumbSchema,
+  articleSchema,
+} from "@/data/schema";
+import { absoluteUrl, publicRobots, siteName, twitterCard } from "@/data/site";
 
 export function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
@@ -68,57 +71,11 @@ export default async function BlogPostPage({ params }) {
   }
 
   const related = getRelatedPosts(post.slug, 3);
-  const postUrl = absoluteUrl(`/blog/${post.slug}`);
-
-  const articleSchema = {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: post.title,
-    description: post.excerpt,
-    image: [post.image],
-    datePublished: post.date,
-    dateModified: post.updated ?? post.date,
-    articleSection: post.category,
-    inLanguage: "en",
-    author: {
-      "@type": "Organization",
-      name: post.author,
-      url: siteUrl,
-    },
-    publisher: {
-      "@type": "Organization",
-      name: siteName,
-      url: siteUrl,
-      logo: {
-        "@type": "ImageObject",
-        url: siteLogoUrl,
-      },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": postUrl,
-    },
-  };
-
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: absoluteUrl("/") },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "Blog",
-        item: absoluteUrl("/blog"),
-      },
-      { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
-    ],
-  };
 
   return (
     <article className="container article-page">
-      <JsonLd data={articleSchema} />
-      <JsonLd data={breadcrumbSchema} />
+      <JsonLd data={articleSchema(post)} />
+      <JsonLd data={articleBreadcrumbSchema(post)} />
 
       <section className="page-hero" style={{ paddingBottom: 0 }}>
         <nav aria-label="Breadcrumb" className="breadcrumb">

@@ -517,11 +517,14 @@ Sitemap: https://example.com/sitemap.xml</code></pre>
     title: "Advanced React Tutorial",
     category: "React",
     author: siteAuthor,
-    date: "2026-07-28",
+    date: "2026-07-29",
+    updated: "2026-07-30",
     image:
-      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=700&fit=crop",
+      "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&h=630&fit=crop",
     excerpt:
       "Move from React basics to Advanced React JS with performance optimization, Context API, Suspense, Lazy Loading, and Custom Hooks.",
+    schemaDescription:
+      "Learn Advanced React concepts including Context API, Custom Hooks, React Suspense, Lazy Loading, and Performance Optimization.",
     content: `
       <p>This Advanced React Tutorial is designed for developers who already understand the basics of React and want to master Advanced React JS concepts. In this guide, you will learn React Performance Optimization, Context API, Custom Hooks, React Suspense, and Lazy Loading through simple explanations and practical examples.</p>
       <p>By the end of this tutorial, you will have a solid understanding of advanced React concepts and be able to build scalable, high-performance React applications.</p>
