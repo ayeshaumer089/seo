@@ -39,20 +39,22 @@ export default function Footer() {
           <ul className="footer-links">
             <li>
               <Link href="/blog/getting-started-with-web-development">
-                Web Development
+                Web Development guide
               </Link>
             </li>
             <li>
               <Link href="/blog/javascript-habits-that-save-time">
-                JavaScript
+                JavaScript habits guide
               </Link>
             </li>
             <li>
-              <Link href="/blog/why-nextjs-is-popular">React &amp; Next.js</Link>
+              <Link href="/blog/why-nextjs-is-popular">
+                React and Next.js guide
+              </Link>
             </li>
             <li>
               <Link href="/blog/programming-tips-for-faster-learning">
-                Programming Tips
+                Programming tips guide
               </Link>
             </li>
           </ul>
