@@ -5,6 +5,7 @@ import { formatDate, getPostBySlug, getRelatedPosts, posts } from "@/data/posts"
 import {
   articleBreadcrumbSchema,
   articleSchema,
+  faqPageSchema,
 } from "@/data/schema";
 import { absoluteUrl, publicRobots, siteName, twitterCard } from "@/data/site";
 
@@ -71,11 +72,13 @@ export default async function BlogPostPage({ params }) {
   }
 
   const related = getRelatedPosts(post.slug, 3);
+  const faqSchema = faqPageSchema(post);
 
   return (
     <article className="container article-page">
       <JsonLd data={articleSchema(post)} />
       <JsonLd data={articleBreadcrumbSchema(post)} />
+      {faqSchema ? <JsonLd data={faqSchema} /> : null}
 
       <section className="page-hero" style={{ paddingBottom: 0 }}>
         <nav aria-label="Breadcrumb" className="breadcrumb">

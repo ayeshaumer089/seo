@@ -525,6 +525,28 @@ Sitemap: https://example.com/sitemap.xml</code></pre>
       "Move from React basics to Advanced React JS with performance optimization, Context API, Suspense, Lazy Loading, and Custom Hooks.",
     schemaDescription:
       "Learn Advanced React concepts including Context API, Custom Hooks, React Suspense, Lazy Loading, and Performance Optimization.",
+    faqs: [
+      {
+        question: "What is Advanced React?",
+        answer:
+          "Advanced React includes concepts beyond basics — such as Context API, Custom Hooks, Performance Optimization, Lazy Loading, React Suspense, Higher Order Components, and scalable architecture patterns. It focuses on building production-ready applications.",
+      },
+      {
+        question: "How do I become an advanced React developer?",
+        answer:
+          "Start with strong JavaScript and React fundamentals. Then practice Advanced React concepts with real projects. Learn Performance Optimization, Context API, Custom Hooks, and Code Splitting, and review your code regularly. Building and refining real apps is the fastest path forward.",
+      },
+      {
+        question: "What are advanced React concepts?",
+        answer:
+          "Key advanced React concepts include React Performance Optimization, Context API, Custom Hooks, Higher Order Components, Lazy Loading and React Suspense, Code Splitting, and state management patterns (including Redux when needed).",
+      },
+      {
+        question: "Should I learn Redux after React?",
+        answer:
+          "Not always immediately. First learn React state, Context API, and Custom Hooks. If your app grows and state becomes complex across many features, then Redux (or another state library) can be a useful next step.",
+      },
+    ],
     content: `
       <p>This Advanced React Tutorial is designed for developers who already understand the basics of React and want to master Advanced React JS concepts. In this guide, you will learn React Performance Optimization, Context API, Custom Hooks, React Suspense, and Lazy Loading through simple explanations and practical examples.</p>
       <p>By the end of this tutorial, you will have a solid understanding of advanced React concepts and be able to build scalable, high-performance React applications.</p>

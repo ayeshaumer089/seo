@@ -130,3 +130,26 @@ export function articleBreadcrumbSchema(post) {
     ],
   };
 }
+
+/**
+ * FAQPage schema — only for posts that define a `faqs` array.
+ * Each item needs question + answer text that matches visible page content.
+ */
+export function faqPageSchema(post) {
+  if (!post.faqs?.length) {
+    return null;
+  }
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: post.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
+}
